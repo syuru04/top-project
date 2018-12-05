@@ -23,15 +23,19 @@ export class OrgChartComponent implements OnInit {
   private draggedId: string;  // 끌려가는 노드 id
 
   ngOnInit() {
-    this.manager = this.isManager();
     this.deptHttp.get().subscribe(dept => {
       this.depts = [dept];  // 조직도 root
       this.setDept(dept);   // 부서를 root 부서로 초기화
+      this.setManager();    // 로그인 사용자가 매니저인가 조사하여 넣는다
     });
   }
 
-  private isManager(): boolean {
-    return (JSON.parse(sessionStorage.getItem("loginData")) as Emp).id == 1;
+  // 로그인 사용자가 매니저인가 조사하여 넣는다
+  private setManager(): void {
+    if (this.dept == this.depts[0]) {
+      const user = JSON.parse(sessionStorage.getItem("loginData")) as Emp;
+      this.manager = user.id == this.depts[0].chief;  
+    }
   }
 
   // 부서 선택 (조직도에서 클릭 이벤트, 클릭한 부서)
@@ -106,6 +110,7 @@ export class OrgChartComponent implements OnInit {
       this.deptHttp.update({ id, chief: -1 } as Dept).subscribe(() => {
         this.dept.chief = 0;
         this.dept.chiefName = "";
+        // this.setManager();
       });
     }
   }
@@ -117,6 +122,7 @@ export class OrgChartComponent implements OnInit {
       this.deptHttp.update({ id, chief: emp.id } as Dept).subscribe(() => {
         this.dept.chief = emp.id;
         this.dept.chiefName = emp.name;
+        this.setManager();
       });
     }
   }

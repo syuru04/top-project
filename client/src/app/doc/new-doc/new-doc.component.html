@@ -3,19 +3,26 @@
     <div class="controls">
       <div class="well bs-component">
         <input type="hidden" id="author" name="author" [ngModel]="author" value={{doc?.author}}/>   
-        <input type="hidden" id="ts" name="ts" [ngModel]="ts">
-        
-        <div class="form-group">
+        <input type="hidden" id="ts" name="ts" [ngModel]="ts"> 
+           
+        <div class="form-group"> 
           <label class="col-lg-2 control-label">전결</label>
-          <div class="col-lg-8">
+          <div *ngIf="docProc!='detail'" class="col-lg-8">
             <label class="radio-label">
               <span><input class="radioBtn" type="radio" name="approver" [value]="lev1Chief" (click)="rdo1Click(lev1Chief)" checked="checked" >{{lev1Name}} ({{lev1Dept}}) &nbsp;&nbsp;</span>
               <span *ngIf="lev2Name"><input class="radioBtn" type="radio" name="approver" [value]="lev2Chief" (click)="rdo2Click(lev1Chief,lev2Chief)">{{lev2Name}} ({{lev2Dept}}) &nbsp;&nbsp;</span>
               <span *ngIf="lev3Name"><input class="radioBtn" type="radio" name="approver" [value]="lev3Chief" (click)="rdo3Click(lev1Chief,lev2Chief,lev3Chief)">{{lev3Name}} ({{lev3Dept}})</span>
-
               <input type="hidden" id="approver1" name="approver1" value={{chief1}} />
               <input *ngIf="lev2Name" type="hidden" id="approver2" name="approver2" value={{chief2}} />
               <input *ngIf="lev3Name" type="hidden" id="approver3" name="approver3" value={{chief3}} />
+            </label>
+          </div>
+
+          <div *ngIf="docProc=='detail'" class="col-lg-8">
+            <label class="radio-label">
+              <span *ngFor="let docAppr of docApprs">
+                {{docAppr.approverName}}({{docAppr.deptName}}) &nbsp;&nbsp;
+              </span>
             </label>
           </div>
         </div>
@@ -25,9 +32,12 @@
           <div class="col-lg-6">
             <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{doc?.title}} />
           </div>
-          <label class="col-lg-2 control-label">
-            <input type="checkbox" id="publish" name="publish" [ngModel]="publish" value={{doc?.publish}}>공지여부 {{doc?.publish}} 
-          </label>          
+          <!-- <div class="col-lg-2">
+            <select class="form-control" name="publish" id="publish" [ngModel]="publish">  
+              <option value="false">공지 비활성화</option>  
+              <option value="true">공지 활성화</option>        
+            </select>  
+          </div> -->
         </div>
 
         <div class="form-group">

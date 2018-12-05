@@ -9,7 +9,6 @@ import org.apache.ibatis.annotations.SelectKey;
 import com.example.demo.domain.Approval;
 import com.example.demo.domain.DocApprDetail;
 
-
 @Mapper
 public interface ApprovalDao {
 	
@@ -20,4 +19,6 @@ public interface ApprovalDao {
 	public int insert(Approval approval);
 	
 	public List<DocApprDetail> approverList(int docId);
+	
+	public int update(Approval approval);
 }

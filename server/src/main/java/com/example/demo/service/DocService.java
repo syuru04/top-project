@@ -9,4 +9,9 @@ import com.example.demo.dao.DocDao;
 public class DocService {
 	@Autowired
 	DocDao dao;
+	
+	public int delete(int id) {
+		dao.deleteAppr(id);
+		return dao.delete(id);
+	}
 }

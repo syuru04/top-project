@@ -15,5 +15,16 @@
 		left join emp e ON e.id = a.approver
 		left join dept d on d.chief = a.approver
 		where a.doc_id = #{docId}
+		order by a.approver desc
 	</select>
+	
+	<update id="update" parameterType="Approval">
+		update approval 
+		<set>			
+			<if test="stat">stat = #{stat} , </if>
+			<if test="ts">ts = #{ts} </if>
+		</set>
+		where doc_id = #{docId}
+		and approver = #{approver}
+	</update>
 </mapper>

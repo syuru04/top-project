@@ -16,7 +16,7 @@
         <span *ngIf="!renaming && emps.length">리더&nbsp; : &nbsp; &nbsp;
           <span *ngIf="!dept.chief">(없음)</span>
           <span *ngIf="dept.chief">
-            {{dept.chiefName}} &nbsp; <b *ngIf="manager" title="해임" (click)="dismiss()">&#x2716;</b>
+            {{dept.chiefName}} &nbsp; <b *ngIf="manager && dept.upId" title="해임" (click)="dismiss()">&#x2716;</b>
           </span>
         </span>
       </header>
