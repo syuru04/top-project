@@ -31,6 +31,6 @@ export class DeptHttpService {
   }
 
   getMembers(id: number): Observable<Emp[]> {
-    return this.http.get<Emp[]>('http://localhost:8080/emps/m/' + id);
+    return this.http.get<Emp[]>(URL + 'm/' + id);
   }
 }

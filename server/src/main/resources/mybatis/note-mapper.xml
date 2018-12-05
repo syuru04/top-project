@@ -4,19 +4,20 @@
 <mapper namespace="com.example.demo.dao.NoteDao">
 
 	<select id="findAll" resultType="Note">
-select n.id, title, body, author, e.name, date_format(ts, '%Y-%m-%d %H:%i:%s') ts
-  from note n left join emp e on e.id = n.author
+		select n.id, title, body, author, e.name, date_format(ts, '%Y-%m-%d %H:%i:%s') ts
+		from note n left join emp e on e.id = n.author
 	</select>
 
 	<select id="find" resultType="Note">
-select n.id, title, body, author, e.name, date_format(ts, '%Y-%m-%d %H:%i:%s') ts 
-  from note n left join emp e on e.id = n.author order by n.id desc limit #{skip}, #{count}
+		select n.id, title, body, author, e.name, date_format(ts, '%Y-%m-%d %H:%i:%s') ts
+		from note n left join emp e on e.id = n.author order by n.id desc limit
+		#{skip}, #{count}
 	</select>
 
 	<select id="findOne" resultType="Note">
-select n.id, title, body, author, e.name, date_format(ts, '%Y-%m-%d %H:%i:%s') ts
-  from note n left join emp e on e.id = n.author
- where n.id = #{id}
+		select n.id, title, body, author, e.name, date_format(ts, '%Y-%m-%d %H:%i:%s') ts
+		from note n left join emp e on e.id = n.author
+		where n.id = #{id}
 	</select>
 
 	<update id="update" parameterType="Note">
@@ -27,6 +28,6 @@ select n.id, title, body, author, e.name, date_format(ts, '%Y-%m-%d %H:%i:%s') t
 			<if test="author">author=#{author}</if>
 		</set>
 		where id=#{id}
-	</update>	
-		
- </mapper>
+	</update>
+
+</mapper>

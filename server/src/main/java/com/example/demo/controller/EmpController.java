@@ -34,11 +34,6 @@ public class EmpController {
 	public Object findAll() {
 		return response(dao.findAll());
 	}
-	
-	@GetMapping("/m/{id}")
-	public Object findMembers(@PathVariable int id) {
-		return response(service.findMembers(id));
-	}
 
 	@PostMapping("/c")
 	public Object findByCode(@RequestBody String code) {
