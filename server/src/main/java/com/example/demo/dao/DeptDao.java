@@ -26,7 +26,10 @@ public interface DeptDao {
 	
 	public Dept findOne(int id);
 	
-	@Select("select id from dept where up_id is null and valid=true")
+	@Select("select coalesce(chief, 0) from dept where up_id is null and valid=true limit 1")
+	public int getTopId();
+
+	@Select("select id from dept where up_id is null and valid=true limit 1")
 	public int findRoot();
 	
 	@Select("select id from dept where up_id=#{id} and valid=true order by dept.name")
