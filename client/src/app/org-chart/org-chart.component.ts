@@ -13,12 +13,13 @@ export class OrgChartComponent implements OnInit {
   constructor(private deptHttp: DeptHttpService,
               private empHttp: EmpHttpService) {}
   
-  private manager: boolean;
-  private depts: Dept[];      // 조직도 root
-  private dept: Dept;         // 부서
-  private emps: Emp[];        // 부서 직원 목록
+  manager: boolean;
+  depts: Dept[];              // 조직도 root
+  dept: Dept;                 // 부서
+  emps: Emp[];                // 부서 직원 목록
+  adding: boolean;            // 새로 만들 부서 이름을 넣는 중
+
   private renaming: boolean;  // 부서 이름을 바꾸어 넣는 중
-  private adding: boolean;    // 새로 만들 부서 이름을 넣는 중
   private toDept: Dept;       // 새로 만들 부서의 상위 부서
   private draggedId: string;  // 끌려가는 노드 id
 
@@ -71,7 +72,7 @@ export class OrgChartComponent implements OnInit {
   private renameDept() {
     if (this.manager) {
       this.renaming = true;  // 바꿀 부서 이름 입력 창을 연다
-      setTimeout(() => document.getElementById("r").focus(), 0);  
+      setTimeout(() => document.getElementById("r").focus(), 0);
     }
   }
 
