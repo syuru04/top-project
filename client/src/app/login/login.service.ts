@@ -15,15 +15,7 @@ const HTTP_OPTIONS = {
   providedIn: 'root'
 })
 export class LoginService {
-  constructor(private http: HttpClient) { }
-
-  // auth(user): Promise<any> {
-  //   return axios.get(this.URL + user.id)
-  //     .then(function(response) {
-  //       console.log(response);
-  //       return response.data;
-  //     });
-  // }
+  constructor(private http: HttpClient) { }  
   
   pwChk(id:string, pw:string): Observable<any> {
     return this.http.post<Boolean>(URL+'pw', [id, pw], HTTP_OPTIONS).pipe(

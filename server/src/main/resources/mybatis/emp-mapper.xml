@@ -38,5 +38,6 @@ select e.id, d.id dept_id, e.name, e.code, phone, email, d.name dept_name
 		select e.id, e.code, e.name, d.id dept_id, d.name dept_name ,phone, email
 		from emp e left join dept d on d.id = e.dept_id
 		where e.code = #{code}
-	</select>
+	</select>	
+	
  </mapper>

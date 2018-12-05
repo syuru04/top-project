@@ -55,3 +55,6 @@ table{
 .textLeft {
     text-align: left;
 }
+.textArea {
+    white-space: pre;
+}

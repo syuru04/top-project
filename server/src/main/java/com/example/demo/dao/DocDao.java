@@ -13,6 +13,7 @@ import com.example.demo.domain.DocAppr;
 public interface DocDao {
 
 	public List<Doc> findAll();
+	
 	public DocAppr findByUpinfo(int deptId);
 	
 	@Insert("insert into doc(title ,body ,publish ,author ,ts) values(#{title}, #{body}, #{publish}, #{author}, #{ts})")
