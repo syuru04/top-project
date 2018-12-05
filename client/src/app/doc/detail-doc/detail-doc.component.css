@@ -10,4 +10,7 @@ h4{
 
 .textLeft {
     text-align: left;
+    white-space: pre;
 }
+
+

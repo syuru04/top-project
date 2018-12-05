@@ -4,9 +4,6 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Doc } from '../../doc/model/doc.model';
 
-
-
-
 const URL = 'http://localhost:8080/docs/';
 
 const HTTP_OPTIONS = {

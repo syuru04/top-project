@@ -30,14 +30,14 @@ export class NewDocHttpService {
   }
 
   update(doc: Doc): Observable<Doc> {
-    return this.http.put<Doc>(URL, doc, HTTP_OPTIONS).pipe(
-      catchError(this.handleError<any>('add'))
+    return this.http.put<Doc>(URL, doc, HTTP_OPTIONS).pipe(      
+      catchError(this.handleError<any>('update'))
     );
   }
 
   addAppr(approver:Approver): Observable<Approver> {
     return this.http.post<Approver>(URLAppr, approver, HTTP_OPTIONS).pipe(
-      catchError(this.handleError<any>('add'))
+      catchError(this.handleError<any>('addAppr'))
     );
   }
 
