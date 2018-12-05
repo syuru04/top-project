@@ -1,0 +1,46 @@
+<div *ngIf="openForm=='Y'">
+  <form #f="ngForm" (ngSubmit)="update(f)" class="form-horizontal">
+    <div class="well bs-component">
+      <fieldset>
+        <div class="row"> 
+          <div class="form-group">
+            <label class="col-lg-2 control-label">부서</label>
+            <div class="col-lg-3">                              
+              <select class="form-control" name="deptId" [ngModel]="f.value.deptId">
+                <option *ngFor="let dept of depts" [value]="dept.id" [selected]="selectedEmp.deptId==dept.id?true:null">{{dept?.name}}</option>               
+              </select>
+            </div>                                  
+          </div>
+        </div>
+        <p class="text-right">
+          <a class="btn btn-success btn-sm" id="btn_del" (click)="remove(selectedEmp.id)">삭제</a>&nbsp;
+          <button type="submit" class="btn btn-primary btn-sm" id="btn_mod">수정</button>&nbsp;
+          <a class="btn btn-default btn-sm" id="btn_cancel" (click)="btnCancel_click()">닫기</a> 
+        </p>
+      </fieldset>
+    </div>  
+  </form>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-bordered">
+    <thead>
+      <tr class="active">
+        <th>ID</th>
+        <th>이름</th>
+        <th>연락처</th>
+        <th>이메일</th>
+        <th>부서</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let emp of emps; index as i">
+        <td><a (click)="onSelect(emp, i)">{{emp.code}}</a></td>
+        <td>{{emp.name}}</td>
+        <td>{{emp.phone}}</td>
+        <td>{{emp.email}}</td>
+        <td>{{emp.deptName}}</td>
+      </tr>
+    </tbody>       
+  </table>
+</div>

@@ -1,0 +1,47 @@
+.col-lg-4 {
+  font-size: 1.8rem;
+  margin-top: 3.3rem;
+}
+ui-tree + input {
+  margin-top: -1.1rem;
+  border-top: 0;
+}
+header {
+  width: 50%;
+  text-align: center;
+  margin-bottom: .5rem;
+}
+strong {
+  font-size: 2rem;
+}
+header > span, header > input, div > input {
+  float: right;
+}
+header > span {
+  margin-top: .5rem;
+}
+input {
+  text-align: center;
+}
+input[type="radio"], strong, b {
+  cursor: pointer;
+}
+[draggable="true"] {
+  cursor: move;
+}
+b {
+  color: red;
+}
+table {
+  background-color: #f8f8f8;
+  border: 1px solid silver;
+}
+table tr:first-child {
+  border-bottom: 1px solid silver;
+}
+tr th:first-child {
+  padding-left: 3rem;
+}
+.sub-dept {
+  background-color: #e8e8e8;
+}

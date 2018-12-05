@@ -1,0 +1,35 @@
+<div *ngIf="docProc=='ins'||docProc=='mod'">
+  <app-new-doc (outputProperty)="receive($event)" [updateId]="updateId"></app-new-doc>
+</div>
+
+<div *ngIf="docProc=='detail'">
+  <app-detail-doc (outputProperty)="receive($event)" [updateId]="updateId"></app-detail-doc>
+</div>
+
+<div *ngIf="docProc=='list'">
+  <p class="text-right">
+    <a class="btn btn-success btn-sm" id="btn_new" (click)="new()">결재등록</a>
+  </p>
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="active">
+          <th>번호</th>
+          <th>작성부서</th>
+          <th style="width:50%">제목</th>
+          <th>작성자</th>
+          <th>작성일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of docs; index as i">
+          <td>{{doc.id}}</td>
+          <td>{{doc.deptName}}</td>
+          <td class="textLeft"><a (click)="detail(doc.id)">{{doc.title}}</a></td>
+          <td>{{doc.authorName}}</td>
+          <td>{{doc.ts|date:'yy.MM.dd HH:mm'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
