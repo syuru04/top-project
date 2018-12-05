@@ -12,4 +12,6 @@ public class DocApprDetail {
 	private int approver;
 	private String approverName;
 	private String deptName;
+	private int stat;
+	private String reason;
 }

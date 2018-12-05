@@ -7,9 +7,9 @@
   <tr>
     <th>결재라인</th>
     <td class="textLeft">
-      <span *ngFor="let docAppr of docApprs">
-        {{docAppr.approverName}}({{docAppr.deptName}}) &nbsp;&nbsp;
-      </span>
+      <p *ngFor="let docAppr of docApprs">
+        {{docAppr.approverName}}({{docAppr.deptName}})<span class="apprSpan"> : {{docAppr.stat==0?'결재 중':docAppr.stat==1?'반려':'결재 완료'}}<span *ngIf="docAppr?.reason!=''">({{docAppr.reason}})</span></span>
+      </p>
     </td>
   </tr>
   <tr>
@@ -31,9 +31,31 @@
 </table>
 <!-- 게시판 버튼 -->
 <p class="text-right" style="margin-top: 10px">
-  <!-- <a class="btn btn-success btn-sm" id="btn_appr" (click)="aprv(doc.id)">승인</a>&nbsp;
-  <a class="btn btn-success btn-sm" id="btn_return" (click)="return(doc.id)">반려</a>&nbsp; -->
+  <a class="btn btn-success btn-sm" id="btn_appr" (click)="aprv(doc.id)">승인</a>&nbsp;
+  <a class="btn btn-success btn-sm" id="btn_return" (click)="return()">반려</a>&nbsp;
   <a class="btn btn-default btn-sm" id="btn_del" (click)="remove(doc.id)">삭제</a>&nbsp;
   <a class="btn btn-primary btn-sm" id="btn_mod" (click)="mod(doc.id)">수정</a>&nbsp;
   <a class="btn btn-default btn-sm" id="btn_list" (click)="docList()">목록</a>
 </p>
+
+<div>
+  <form *ngIf="returnMod==true" #f="ngForm" (ngSubmit)="returnAction(f, doc.id)" class="form-horizontal">
+    <div class="well bs-component">
+      <fieldset>
+        <div class="row" style="margin-top: 15px;"> 
+          <div class="form-group">
+            <label class="col-lg-2 control-label">반려사유</label>
+            <div class="col-lg-8">
+              <input type="text" class="form-control" id="reason" name="reason" [ngModel]="reason" />
+            </div>
+            <div class="col-lg-2">
+              <button type="submit" class="btn btn-primary" id="btn_mod">입력</button>&nbsp;
+              <a class="btn btn-default" id="btn_cancel" (click)="cancel()">닫기</a> 
+            </div>                               
+          </div>
+        </div>
+      </fieldset>
+    </div>  
+  </form>
+</div>
+

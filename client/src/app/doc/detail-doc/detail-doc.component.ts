@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { NgForm } from '@angular/forms';
 
 import { Doc } from '../model/doc.model';
 import { Approver } from '../model/approver.model';
@@ -25,6 +26,8 @@ export class DetailDocComponent implements OnInit {
   ts: string;
   docId: number;
   approver: number;
+  returnMod: boolean;
+  stat: string;
 
   constructor(
     private detailDocService: DetailDocHttpService,
@@ -40,20 +43,48 @@ export class DetailDocComponent implements OnInit {
     });
 
     this.detailDocService.getApproverList(this.updateId).subscribe(data => {
-      this.docApprs = data;      
+      this.docApprs = data;            
     });
   }
 
-  docList() {
-    this.outputProperty.next({docProc:'list'});  
+  // 승인버튼 클릭
+  aprv(id:number) {
+    if (window.confirm("Approval ?")) {
+      const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
+      const apprInfo = { docId:id, approver:sessionValue.id, stat:2, ts:this.ts} as Approver; 
+      this.detailDocService.aprv(apprInfo).subscribe(data => {
+        this.outputProperty.next({docProc:'list'});  
+      });
+    } else {
+      return false;
+    }
   }
 
-  mod(id:number): void {
-    this.updateId = id;
-    this.outputProperty.next({docProc:'mod'});  
+  // 반려버튼 클릭
+  return(): void {
+    this.returnMod=true;
   }
 
-  remove(id:number) {
+  // 반려폼에서 닫기버튼 클릭
+  cancel(): void {
+    this.returnMod=false;
+  }
+
+  // 반려폼에서 입력버튼 클릭
+  returnAction(form: NgForm, id:number) {
+    if (window.confirm("Return ?")) {
+      const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));      
+      const apprInfo = { docId:id, approver:sessionValue.id, stat:1, reason:form.value.reason, ts:this.ts } as Approver; 
+      this.detailDocService.aprv(apprInfo).subscribe(data => {
+        this.outputProperty.next({docProc:'list'});  
+      });
+    } else {
+      return false;
+    }
+  }
+
+   // 삭제버튼 클릭
+   remove(id:number) {
     if (window.confirm("Delete ?")) {
       this.detailDocService.remove(id).subscribe(() => this.docs.splice(id, 1));
       this.outputProperty.next({docProc:'list'});  
@@ -63,15 +94,15 @@ export class DetailDocComponent implements OnInit {
     }
   }   
 
-  aprv(id:number) {
-    if (window.confirm("Approval ?")) {
-      const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
-      const apprInfo = { docId:id, approver:sessionValue.id, stat:1, ts:this.ts} as Approver; 
-      this.detailDocService.aprv(apprInfo).subscribe(data => {
-        this.outputProperty.next({docProc:'list'});  
-      });
-    } else {
-      return false;
-    }
+  // 수정버튼 클릭
+  mod(id:number): void {
+    this.updateId = id;
+    this.outputProperty.next({docProc:'mod'});  
   }
+
+  // 목록버튼 클릭
+  docList() {
+    this.outputProperty.next({docProc:'list'});  
+  }
+
 }
