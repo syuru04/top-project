@@ -33,15 +33,15 @@ b {
   color: red;
 }
 table {
-  background-color: #f8f8f8;
   border: 1px solid silver;
 }
 table tr:first-child {
   border-bottom: 1px solid silver;
-}
-tr th:first-child {
-  padding-left: 3rem;
+  background-color: #f8f8f8;
 }
 .sub-dept {
   background-color: #e8e8e8;
+}
+tr th:first-child {
+  padding-left: 3rem;
 }
