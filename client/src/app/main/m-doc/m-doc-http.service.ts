@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Doc } from 'src/app/doc/doc.model';
+import { Doc } from '../../doc/model/doc.model';
+
 
 
 
