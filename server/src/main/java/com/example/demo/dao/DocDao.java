@@ -2,6 +2,7 @@ package com.example.demo.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.SelectKey;
@@ -22,5 +23,11 @@ public interface DocDao {
 	public Doc findOne(int id);
 			
 	public int update(Doc doc);
+	
+	@Delete("delete from doc where id=#{id}")
+	public int delete(int id);
+	
+	@Delete("delete from approval where doc_id=#{id}")
+	public int deleteAppr(int id);
 
 }

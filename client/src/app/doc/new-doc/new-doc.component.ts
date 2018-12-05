@@ -2,11 +2,13 @@ import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 
-import { NewDocHttpService } from './new-doc-http.service';
-import { DocHttpService } from '../doc-http.service';
 import { Doc } from '../model/doc.model';
 import { Approver } from '../model/approver.model';
-import { DocAppr } from '../model/doc-appr.model';
+import { DocApprDetail } from '../model/doc-appr-detail.model';
+
+import { NewDocHttpService } from './new-doc-http.service';
+import { DocHttpService } from '../doc-http.service';
+import { DetailDocHttpService } from '../detail-doc/detail-doc-http.service';
 
 @Component({
   selector: 'app-new-doc',
@@ -20,6 +22,7 @@ export class NewDocComponent implements OnInit {
 
   doc: Doc;
   docs: Doc[];
+  docApprs: DocApprDetail[];
 
   lev1Dept: string;   lev1Chief: number;    lev1Name: string;
   lev2Dept: string;   lev2Chief: number;    lev2Name: string;
@@ -34,7 +37,8 @@ export class NewDocComponent implements OnInit {
 
   constructor(
     private newDocService: NewDocHttpService,
-    private docService: DocHttpService
+    private docService: DocHttpService,
+    private detailDocService: DetailDocHttpService
     ) { }
 
 
@@ -64,21 +68,27 @@ export class NewDocComponent implements OnInit {
         this.doc = data;
         this.docProc = 'detail';
       });
+
+      this.detailDocService.getApproverList(this.updateId).subscribe(data => {
+        this.docApprs = data;      
+      });
     }   
   }
 
   f_action(form: NgForm) {
 
     // 수정시 데이터 가져오기
-    if(this.docProc=='detail') {
-      this.newDocService.update(form.value).subscribe(doc => {
+    if(this.docProc=='detail') {      
+      const modDoc = Object.assign({ id: this.updateId }, form.value);
+      this.newDocService.update(modDoc).subscribe(result => {
         this.outputProperty.next({docProc:'list'});  
+        window.location.reload();   
       }); 
       
     // 등록
     } else {
-      const doc = Object.assign({ done: false }, form.value);          
-      this.newDocService.add(doc).subscribe(result => {        
+      const newDoc = Object.assign({ done: false }, form.value);    
+      this.newDocService.add(newDoc).subscribe(result => {        
         this.docId = result;
         
         // approve: 결재자저장          

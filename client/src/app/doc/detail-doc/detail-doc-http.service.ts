@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { DocApprDetail } from '../model/doc-appr-detail.model';
+import { Approver } from '../model/approver.model';
 
 const URL = 'http://localhost:8080/docs/';
 const URL_appr = 'http://localhost:8080/appr/';
@@ -20,6 +21,18 @@ export class DetailDocHttpService {
   getApproverList(id:number): Observable<DocApprDetail[]> {      
     return this.http.post<DocApprDetail[]>(URL_appr+'a/', id, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('getApproverList'))
+    );
+  }
+
+  remove(id: number): Observable<any> {
+    return this.http.delete(URL + id).pipe(
+      catchError(this.handleError<any>('delete'))
+    );
+  }
+
+  aprv(approver: Approver): Observable<any> {
+    return this.http.put<Approver>(URL, approver, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('aprv'))
     );
   }
 
