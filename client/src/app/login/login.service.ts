@@ -15,11 +15,7 @@ const HTTP_OPTIONS = {
   providedIn: 'root'
 })
 export class LoginService {
-<<<<<<< HEAD
   constructor(private http: HttpClient) { }
-=======
-  constructor(private http: HttpClient) { }  
->>>>>>> 0d903f0f2b7e5eb31863f6fc90ef43f4fd4f217b
   
   //로그인시 아이디,비밀번호 체크
   pwChk(id:string, pw:string): Observable<any> {
