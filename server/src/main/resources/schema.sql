@@ -1,8 +1,8 @@
 drop database if exists test;
-create database test character set 'utf8' collate 'utf8_general_ci';
+create database test character set 'utf8mb4' collate 'utf8mb4_unicode_ci';
 use test;
 
-set names utf8mb4 collate utf8mb4_unicode_ci;
+set names 'utf8mb4' collate 'utf8mb4_unicode_ci';
 
 drop table if exists note;
 drop table if exists approval;
