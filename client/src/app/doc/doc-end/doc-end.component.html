@@ -1,21 +1,12 @@
-<!-- 내 결재 입력 및 수정 폼 -->
-<div *ngIf="docProc=='ins'||docProc=='mod'">
-  <h4 class="sub-header">※ 결재상신</h4>
-  <app-new-doc (outputProperty)="receive($event)" [updateId]="updateId"></app-new-doc>
-</div>
-
-<!-- 내 결재 상세보기 -->
+<!-- 결재완료 상세보기 -->
 <div *ngIf="docProc=='detail'">
-  <h4 class="sub-header">※ 결재상신 - 상세보기</h4>
+  <h4 class="sub-header">※ 결재완료 - 상세보기</h4>
   <app-detail-doc (outputProperty)="receive($event)" [updateId]="updateId" [docMenu]="docMenu"></app-detail-doc>
 </div>
 
-<!-- 내 결재 리스트 -->
+<!-- 결재완료 리스트 -->
 <div *ngIf="docProc=='list'">
-  <h4 class="sub-header">※ 결재상신</h4>
-  <p class="text-right">
-    <a class="btn btn-success btn-sm" id="btn_new" (click)="new()">결재등록</a>
-  </p>
+  <h4 class="sub-header">※ 결재완료</h4>
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
@@ -24,7 +15,6 @@
           <th>작성자</th>
           <th style="width:50%">제목</th>
           <th>작성일</th>
-          <th>결재현황</th>
         </tr>
       </thead>
       <tbody>
@@ -33,10 +23,9 @@
           <td>{{doc.authorName}}</td>
           <td class="textLeft"><a (click)="detail(doc.docId)">{{doc.title}}</a></td>
           <td>{{doc.ts|date:'yy.MM.dd HH:mm'}}</td>
-          <td>{{doc.stat==0?'결재 중':doc.stat==1?'반려':'결재 완료'}}</td>
         </tr>
         <tr *ngIf="count==0">
-          <td colspan="5" class="fontGray">작성한 결재문서가 없습니다.</td>
+          <td colspan="4" class="fontGray">결재완료 된 문서가 없습니다.</td>
         </tr>
       </tbody>
     </table>

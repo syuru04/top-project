@@ -20,6 +20,8 @@ import { DetailDocComponent } from './doc/detail-doc/detail-doc.component';
 import { MainComponent } from './main/main.component';
 import { MNoteComponent } from './main/m-note/m-note.component';
 import { MDocComponent } from './main/m-doc/m-doc.component';
+import { DocIngComponent } from './doc/doc-ing/doc-ing.component';
+import { DocEndComponent } from './doc/doc-end/doc-end.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { MDocComponent } from './main/m-doc/m-doc.component';
     DetailDocComponent,
     MainComponent,
     MNoteComponent,
-    MDocComponent
+    MDocComponent,
+    DocIngComponent,
+    DocEndComponent
   ],
   imports: [
     BrowserModule,

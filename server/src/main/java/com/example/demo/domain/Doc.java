@@ -9,11 +9,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Doc {
 	private int id;
+	private int docId;
 	private String title;
-	private String body;
-	private boolean publish;
 	private int author;
 	private String authorName;
+	private String deptId;
 	private String deptName;
+	private int stat;
+	private String body;
 	private String ts;
 }

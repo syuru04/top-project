@@ -28,34 +28,63 @@ public class DocController {
 	@Autowired
 	private DocService service;
 	
+	// 전자결재 전체조회
 	@GetMapping
 	public Object findAll() {
 		return response(dao.findAll());
 	}
 	
+	// 전자결재 상세보기
 	@GetMapping("/{id}")
 	public Object findByDoc(@PathVariable int id) {
 		return response(dao.findOne(id));
 	}
 	
+	// 전자결재 등록 시 상위 부서장 조회
 	@PostMapping("/u")
 	public Object findByUpinfo(@RequestBody int deptId) {
 		return response(dao.findByUpinfo(deptId));
 	}	
 	
+	// 전자결재 등록
 	@PostMapping
 	public Object insert(@RequestBody Doc doc) {
 		response(dao.insert(doc));
 		return doc.getId();
 	}
 	
+	// 전자결재 수정
 	@PutMapping
 	public Object update(@RequestBody Doc doc) {
 		return response(dao.update(doc), HttpStatus.CONFLICT);
 	}	
 	
+	// 전자결재 삭제
 	@DeleteMapping("/{id}")
 	public Object delete(@PathVariable int id) {
 		return response(service.delete(id), HttpStatus.NOT_FOUND);
 	}
+	
+	/**
+	 * 전자결재 - 결재상신 리스트 조회
+	 * @param author - 작성자(세션ID)
+	 * @return list<Doc>
+	 */
+	@PostMapping("/my")
+	public Object myDoc(@RequestBody int author) {
+		return response(dao.myDoc(author));
+	}
+	
+	/**
+	 * 전자결재 - 결재승인,완료 리스트 조회
+	 * @param arg[0] : approver - 결재자(세션ID)
+	 * @param arg[1] : stat 		- 결재여부(0:결재상신/2:완료)
+	 * @return list<Doc>
+	 */
+	@PostMapping("/aprv")
+	public Object aprvDoc(@RequestBody int[] arg) {
+		return response(dao.aprvDoc(arg[0], arg[1]));
+	}
+	
+	
 }

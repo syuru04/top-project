@@ -43,9 +43,32 @@
 		<set>
 			<if test="(title != null) and (title != '')">title=#{title}, </if>
 			<if test="(body != null) and (body != '')">body=#{body}, </if>
-			<if test="publish">publish=#{publish}, </if>
 			<if test="ts">ts=#{ts}</if>
 		</set>
 		where id=#{id}
 	</update>
+	
+	<select id="myDoc" resultType="Doc">
+		select d.id as doc_id, d.title, d.author, emp.name as author_name, emp.dept_id, emp.dept_name as deptName, d.ts
+		from doc d
+		left join (
+		  select emp.id, emp.dept_id, dept.name dept_name, emp.name 
+		  from emp
+		  left join dept ON emp.dept_id = dept.id
+		) emp on d.author=emp.id
+		where d.author = #{author}
+	</select>
+	
+	<select id="aprvDoc" resultType="Doc">
+		select a.doc_id, d.title, d.author, emp.name as authorName, emp.dept_id, emp.dept_name as deptName, a.stat, d.ts
+		from approval a
+		left join doc d on d.id = a.doc_id
+		left join (
+		  select emp.id, emp.dept_id, dept.name dept_name, emp.name 
+		  from emp
+		  left join dept ON emp.dept_id = dept.id
+		) emp on d.author=emp.id
+		where a.approver = #{approver}
+		and a.stat = #{stat}
+	</select>
 </mapper>

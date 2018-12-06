@@ -1,21 +1,12 @@
-<!-- 내 결재 입력 및 수정 폼 -->
-<div *ngIf="docProc=='ins'||docProc=='mod'">
-  <h4 class="sub-header">※ 결재상신</h4>
-  <app-new-doc (outputProperty)="receive($event)" [updateId]="updateId"></app-new-doc>
-</div>
-
-<!-- 내 결재 상세보기 -->
+<!-- 결재승인 상세보기 -->
 <div *ngIf="docProc=='detail'">
-  <h4 class="sub-header">※ 결재상신 - 상세보기</h4>
+  <h4 class="sub-header">※ 결재승인 - 상세보기</h4>
   <app-detail-doc (outputProperty)="receive($event)" [updateId]="updateId" [docMenu]="docMenu"></app-detail-doc>
 </div>
 
-<!-- 내 결재 리스트 -->
+<!-- 결재승인 리스트 -->
 <div *ngIf="docProc=='list'">
-  <h4 class="sub-header">※ 결재상신</h4>
-  <p class="text-right">
-    <a class="btn btn-success btn-sm" id="btn_new" (click)="new()">결재등록</a>
-  </p>
+  <h4 class="sub-header">※ 결재승인</h4>
   <div class="table-responsive">
     <table class="table table-bordered">
       <thead>
@@ -36,7 +27,7 @@
           <td>{{doc.stat==0?'결재 중':doc.stat==1?'반려':'결재 완료'}}</td>
         </tr>
         <tr *ngIf="count==0">
-          <td colspan="5" class="fontGray">작성한 결재문서가 없습니다.</td>
+          <td colspan="5" class="fontGray">결재승인 할 문서가 없습니다.</td>
         </tr>
       </tbody>
     </table>

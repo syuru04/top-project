@@ -1,10 +1,12 @@
 export class Doc {
     id: number;
+    docId: number;
     title: string;
-    body: string;
-    publish: string;
     author: number;
     authorName: string;
+    deptId: number;
     deptName: string;
-    ts:string;
+    stat: number;
+    body: string;
+    ts: string;
 }

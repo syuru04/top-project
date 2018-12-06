@@ -18,6 +18,7 @@ export class DetailDocComponent implements OnInit {
 
   @Output() outputProperty: EventEmitter<any> = new EventEmitter();
   @Input() updateId: number;
+  @Input() docMenu: number;
 
   doc: Doc;
   docs: Doc[];
@@ -34,10 +35,13 @@ export class DetailDocComponent implements OnInit {
     private docService: DocHttpService) { }
 
   ngOnInit() {
+    
+    // 현재 날짜시간 불러오기
     var datePipe = new DatePipe("en-US");
     var date2 = datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.ts = date2;
     
+    // 결재문서 상세보기
     this.docService.getDetail(this.updateId).subscribe(data => {
       this.doc = data;      
     });
@@ -49,7 +53,7 @@ export class DetailDocComponent implements OnInit {
 
   // 승인버튼 클릭
   aprv(id:number) {
-    if (window.confirm("Approval ?")) {
+    if (window.confirm("승인처리 하시겠습니까?")) {
       const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
       const apprInfo = { docId:id, approver:sessionValue.id, stat:2, ts:this.ts} as Approver; 
       this.detailDocService.aprv(apprInfo).subscribe(data => {
@@ -86,7 +90,7 @@ export class DetailDocComponent implements OnInit {
    // 삭제버튼 클릭
    remove(id:number) {
     if (window.confirm("Delete ?")) {
-      this.detailDocService.remove(id).subscribe(() => this.docs.splice(id, 1));
+      this.detailDocService.remove(id).subscribe(data => {});
       this.outputProperty.next({docProc:'list'});  
       window.location.reload();
     } else {
