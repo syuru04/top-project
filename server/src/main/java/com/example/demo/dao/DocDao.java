@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.SelectKey;
 
 import com.example.demo.domain.Doc;
 import com.example.demo.domain.DocAppr;
-import com.example.demo.domain.Note;
 
 @Mapper
 public interface DocDao {

@@ -14,7 +14,10 @@ import { LoginService } from '../login/login.service';
 })
 export class JoinComponent implements OnInit {
 
+  //상위컴포넌트로 데이터넘기기
   @Output() outputProperty: EventEmitter<any> = new EventEmitter();
+
+  //상위컴포넌트에서 데이터받아오기
   @Input() proc: string;
 
   loginProc = 'join';
@@ -29,6 +32,7 @@ export class JoinComponent implements OnInit {
     private loginService: LoginService
   ) { }
 
+
   ngOnInit() {
     this.deptService.get().subscribe(data => {
       this.depts = data;
@@ -42,9 +46,12 @@ export class JoinComponent implements OnInit {
     }
   }
 
+  //취소버튼 클릭시 로그인화면으로전환
   cancel(): void {
     this.outputProperty.next({ loginProc: 'login' });
   }
+
+  //아이디 중복확인
   codeChk(form:NgForm){
     const emp = Object.assign({ done: false }, form.value);    
     if (emp.code == undefined) {
@@ -63,6 +70,7 @@ export class JoinComponent implements OnInit {
       }
     });
   }
+  //회원가입or정보수정에서 등록버튼 클릭시
   f_submit(form: NgForm) {
     const emp = Object.assign({ done: false }, form.value);
 

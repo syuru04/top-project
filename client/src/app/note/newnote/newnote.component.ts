@@ -27,6 +27,7 @@ export class NewnoteComponent implements OnInit {
   constructor(private service: NewNoteService) { }
 
   ngOnInit() {
+    //상세보기에서 글작성버튼 클릭시, 
     if (this.updateId === undefined) {            
       this.addBtn = "Y";
       this.updateBtn = "N";      
@@ -37,6 +38,7 @@ export class NewnoteComponent implements OnInit {
         this.ts = date2;
       });
     } else {
+      //상세보기에서 수정버튼 클릭시
       this.addBtn = "N";
       this.updateBtn = "Y";      
       this.service.get2(this.updateId).subscribe(data => {
@@ -48,6 +50,7 @@ export class NewnoteComponent implements OnInit {
     }
   }
 
+  //등록버튼 클릭시
   add(form: NgForm) {
     if (this.updateId === undefined) {
       const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
@@ -70,7 +73,8 @@ export class NewnoteComponent implements OnInit {
         });
     } return false;
   }
-
+  
+  //수정버튼 클릭시
   update(form: NgForm) {
     if (this.updateId === undefined) {
       return false;
@@ -84,6 +88,7 @@ export class NewnoteComponent implements OnInit {
     }
   }
 
+  //취소버튼 클릭시 목록화면으로 전환
   btnCancel() {
     this.formStat = "list";
     this.outputProperty.emit(this.formStat);

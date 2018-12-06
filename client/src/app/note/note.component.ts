@@ -53,10 +53,13 @@ export class NoteComponent implements OnInit {
     });
 
   }
+
+  //newnote 에서 formStat 받아오는 메소드
   outputEvent(formStat: string) {
     this.formStat = formStat;
   }
 
+  //페이징
   pageBtnClick(id) {
     if (id === 1) {
       this.start = 0;
@@ -82,26 +85,27 @@ export class NoteComponent implements OnInit {
       });
     }
   }
-  goupdate(id,author) {
-        
+
+  //수정버튼 클릭시 등록화면으로 전환
+  goupdate(id,author) {        
       this.formStat = "input";
-      this.updateId = id;
-    
+      this.updateId = id;    
   }
 
+  //목록으로 전환
   btnListClick(): void {
     this.formStat = "list"
   }
 
+  //등록화면으로 전환
   btnNewClick(): void {
     this.formStat = "input"
     this.updateId = undefined;
   }
 
+  //제목 클릭시 상세보기화면으로 전환
   btnTitleClick(id: number, i: number,author:number): void {
-
-    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));    
-    alert(sessionValue.id +"/"+author);
+    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));        
     if (sessionValue.id == author){
       this.authorId = 'Y';
     }
@@ -110,6 +114,7 @@ export class NoteComponent implements OnInit {
     this.service.get2(id).subscribe(data => this.note = data);
   }
 
+  //글 삭제
   remove(id: number) {
     if (window.confirm("Delete ?")) {
       this.service.remove(id).subscribe(() => this.notes.splice(id, 1));

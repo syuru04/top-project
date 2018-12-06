@@ -17,12 +17,14 @@ const HTTP_OPTIONS = {
 export class LoginService {
   constructor(private http: HttpClient) { }  
   
+  //로그인시 아이디,비밀번호 체크
   pwChk(id:string, pw:string): Observable<any> {
     return this.http.post<Boolean>(URL+'pw', [id, pw], HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('pwChk'))
     );
   }
 
+  //로그인시 아이디,비번체크 완료후 로그인정보 불러오기
   getEmp(id:string): Observable<Emp> {
     return this.http.post<Emp>(URL+'c/', id, HTTP_OPTIONS);
   }

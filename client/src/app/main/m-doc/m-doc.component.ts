@@ -12,6 +12,7 @@ export class MDocComponent implements OnInit {
   constructor(private docService: MDocHttpService) { }
 
   ngOnInit() {    
+    //리스트불러오기
     this.docService.pageRange(0,5).subscribe(data => {
       this.docs = data;
     });

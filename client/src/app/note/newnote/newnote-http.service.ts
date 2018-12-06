@@ -19,19 +19,24 @@ export class NewNoteService {
     
   constructor(private http: HttpClient) { }
   
+  //글작성시 정보불러오기
   get(): Observable<Note[]> {
     return this.http.get<Note[]>(URL);
   }
+
+  //글수정시 정보불러오기
   get2(id): Observable<Note> {
     return this.http.get<Note>(URL + id);
   }
   
+  //새글작성
   add(note: Note2): Observable<any> {
     return this.http.post<Note2>(URL, note, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('insert'))
     );
   }
 
+  //글수정
   update(note: Note3): Observable<any> {
     console.log(note);    
     return this.http.put<Note3>(URL, note, HTTP_OPTIONS).pipe(

@@ -11,13 +11,15 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">제목</label>
             <div class="col-lg-8">
-              <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{note?.title}}/>              
+              <input *ngIf="addBtn =='Y'" type="text" class="form-control" id="title" name="title" [ngModel]="title" />              
+              <input *ngIf="updateBtn =='Y'" type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{note?.title}}/>              
             </div>
           </div>
           <div class="form-group">
             <label for="textArea" class="col-lg-2 control-label">내용</label>            
             <div class="col-lg-8">
-              <textarea class="form-control" rows="10" id="body" name="body" style="resize: none" [ngModel]="body" value={{note?.body}} ></textarea>              
+              <textarea *ngIf="addBtn =='Y'" class="form-control" rows="10" id="body" name="body" style="resize: none" [ngModel]="body" ></textarea>              
+              <textarea *ngIf="updateBtn =='Y'" class="form-control" rows="10" id="body" name="body" style="resize: none" [ngModel]="body" value={{note?.body}} ></textarea>              
             </div>
           </div>
           <p class="text-right">
