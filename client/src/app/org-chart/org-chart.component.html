@@ -9,7 +9,7 @@
 
     <div class="col-lg-8">
       <header *ngIf="dept && emps">
-        <strong title="(클릭) - 부서 이름 변경" (click)="renameDept()">{{dept.name}} &nbsp; </strong>
+        <strong [title]="manager? '(클릭) - 부서 이름 변경': ''" (click)="renameDept()">{{dept.name}} &nbsp; </strong>
         <input *ngIf="renaming" id="r" placeholder="새 이름" title="[Enter] 적용, [Esc] 취소"
                 type="text" (keydown.enter)="rename($event)" (keydown.esc)="renaming = false">
         <b *ngIf="manager && !renaming && !emps.length && dept.upId" title="폐쇄" (click)="deleteDept()">&#x2716;</b>

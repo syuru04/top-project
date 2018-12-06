@@ -1,6 +1,6 @@
 <ul>
   <li *ngFor="let dept of depts" id="d_{{dept.id}}"
-             [draggable]="dept.upId && manager" 
+             [draggable]="manager && dept.upId" 
              (dragstart)="parent.drag($event)"
               (dragover)="parent.drop(false, $event, dept)"
                   (drop)="parent.drop(true, $event, dept)"
