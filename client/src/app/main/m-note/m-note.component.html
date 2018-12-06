@@ -12,7 +12,7 @@
     <tbody>
       <tr *ngFor="let note of notes;index as i" data-index="#i">
         <td>{{note.id}}</td>
-        <td class="textLeft"><a (click)="btnTitleClick(note.id,i)">{{note.title}}</a></td>
+        <td class="textLeft"><p >{{note.title}}</p></td>
         <td>{{note.name}}</td>
         <td>{{note.ts | date:'MM.dd'}}</td>
       </tr>

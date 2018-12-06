@@ -30,6 +30,9 @@ public interface EmpDao {
 	
 	public Emp findOne(int id);
 	
+	@Select("select count(*) from emp where code = #{code}")
+	public String findJoinCode(String code);
+	
 	public List<Emp> findMembers(int id);
 	
 	@Select("select count(*) from emp where valid = true")

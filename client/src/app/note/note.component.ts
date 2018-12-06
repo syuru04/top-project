@@ -1,8 +1,6 @@
-import { Component, OnInit, } from '@angular/core';
-import { Note, NotePage } from './note.model';
+import { Component, OnInit } from '@angular/core';
 import { NoteService } from './note-http.service';
-import { TouchSequence, Alert } from 'selenium-webdriver';
-import { ArrayType } from '@angular/compiler';
+import { Note } from './note.model';
 
 
 @Component({
@@ -14,6 +12,7 @@ import { ArrayType } from '@angular/compiler';
 export class NoteComponent implements OnInit {
   today = new Date();
   formStat = "list";
+  authorId = "N";
   updateId: number;
   index: number;
   start: number;
@@ -54,10 +53,13 @@ export class NoteComponent implements OnInit {
     });
 
   }
+
+  //newnote 에서 formStat 받아오는 메소드
   outputEvent(formStat: string) {
     this.formStat = formStat;
   }
 
+  //페이징
   pageBtnClick(id) {
     if (id === 1) {
       this.start = 0;
@@ -83,31 +85,36 @@ export class NoteComponent implements OnInit {
       });
     }
   }
-  goupdate(id,author) {
-    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));    
-    if (author == sessionValue.id) {    
+
+  //수정버튼 클릭시 등록화면으로 전환
+  goupdate(id,author) {        
       this.formStat = "input";
-      this.updateId = id;
-    } else {    
-      alert("작성자만 수정이 가능합니다.")
-    }
+      this.updateId = id;    
   }
 
+  //목록으로 전환
   btnListClick(): void {
     this.formStat = "list"
   }
 
+  //등록화면으로 전환
   btnNewClick(): void {
     this.formStat = "input"
     this.updateId = undefined;
   }
 
-  btnTitleClick(id: number, i: number): void {
+  //제목 클릭시 상세보기화면으로 전환
+  btnTitleClick(id: number, i: number,author:number): void {
+    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));        
+    if (sessionValue.id == author){
+      this.authorId = 'Y';
+    }
     this.index = i;
     this.formStat = "detail"
     this.service.get2(id).subscribe(data => this.note = data);
   }
 
+  //글 삭제
   remove(id: number) {
     if (window.confirm("Delete ?")) {
       this.service.remove(id).subscribe(() => this.notes.splice(id, 1));

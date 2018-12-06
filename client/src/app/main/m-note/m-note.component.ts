@@ -12,6 +12,7 @@ export class MNoteComponent implements OnInit {
   constructor(private service: MNoteService) { }
   
   ngOnInit() {
+    //리스트불러오기
     this.service.pageRange(0,5).subscribe(data => {
       this.notes = data;
     });

@@ -1,3 +1,9 @@
+drop database if exists test;
+create database test character set 'utf8mb4' collate 'utf8mb4_unicode_ci';
+use test;
+
+set names 'utf8mb4' collate 'utf8mb4_unicode_ci';
+
 drop table if exists note;
 drop table if exists approval;
 drop table if exists doc;
@@ -11,7 +17,7 @@ create table dept (
   up_id int null comment '상위부서코드',
   valid boolean not null default true comment '유효',
   foreign key(up_id) references dept(id) on update cascade
-) engine=InnoDB character set 'utf8' collate 'utf8_general_ci' comment='부서,팀관리';
+) engine=InnoDB comment='부서,팀관리';
 
 create table emp (
   id int not null auto_increment primary key comment 'emp id',
@@ -23,7 +29,7 @@ create table emp (
   email varchar(50) not null comment '이메일',
   valid boolean not null default true comment '유효',
   foreign key(dept_id) references dept(id) on update cascade      
-) engine=InnoDB character set 'utf8' collate 'utf8_general_ci' comment='사원관리';
+) engine=InnoDB comment='사원관리';
 
 create table doc (
   id int not null auto_increment primary key comment '문서번호',
@@ -33,7 +39,7 @@ create table doc (
   author int not null comment '작성자',
   ts datetime default current_timestamp on update current_timestamp comment '수정일시',
   foreign key(author) references emp(id) on update cascade
-) engine=InnoDB character set 'utf8' collate 'utf8_general_ci' comment='전자결재';
+) engine=InnoDB comment='전자결재';
 
 create table approval (
   id int not null auto_increment primary key comment '승인번호',
@@ -44,7 +50,7 @@ create table approval (
   ts datetime default current_timestamp on update current_timestamp comment '수정일자',  
   foreign key(doc_id) references doc(id) on update cascade,
   foreign key(approver) references emp(id) on update cascade
-) engine=InnoDB character set 'utf8' collate 'utf8_general_ci' comment='전자결재 마스터';
+) engine=InnoDB comment='전자결재 마스터';
 
 create table note (
   id int not null auto_increment primary key comment '글번호',
@@ -53,4 +59,4 @@ create table note (
   author int not null comment '등록자',
   ts datetime default current_timestamp on update current_timestamp comment '등록일시',
   foreign key(author) references emp(id) on update cascade
-) engine=InnoDB character set 'utf8' collate 'utf8_general_ci' comment='게시판';
+) engine=InnoDB comment='게시판';

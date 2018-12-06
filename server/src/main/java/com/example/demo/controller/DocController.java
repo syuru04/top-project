@@ -86,5 +86,8 @@ public class DocController {
 		return response(dao.aprvDoc(arg[0], arg[1]));
 	}
 	
-	
+	@PostMapping("/range")
+	public Object find(@RequestBody int[] range) {
+		return response(dao.find(range[0], range[1]));
+	}
 }

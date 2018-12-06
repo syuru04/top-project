@@ -49,6 +49,11 @@ public class EmpController {
 	public Object findById(@PathVariable int id) {
 		return response(dao.findOne(id));
 	}
+	
+	@PostMapping("/j")
+	public Object findJoinCode(@RequestBody String code) {
+		return response(dao.findJoinCode(code));
+	}
 
 	@DeleteMapping("/{id}")
 	public Object delete(@PathVariable int id) {

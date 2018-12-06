@@ -23,6 +23,8 @@ public interface DocDao {
 	public int insert(Doc doc);
 	
 	public Doc findOne(int id);
+	
+	public List<Doc> find(@Param("skip") int skip, @Param("count") int count);
 			
 	public int update(Doc doc);
 	
