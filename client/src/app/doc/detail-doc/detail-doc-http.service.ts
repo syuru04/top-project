@@ -31,7 +31,7 @@ export class DetailDocHttpService {
   }
 
   aprv(approver: Approver): Observable<any> {
-    return this.http.put<Approver>(URL, approver, HTTP_OPTIONS).pipe(
+    return this.http.put<Approver>(URL_appr, approver, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('aprv'))
     );
   }

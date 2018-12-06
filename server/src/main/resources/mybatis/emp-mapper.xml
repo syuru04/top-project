@@ -4,20 +4,22 @@
 <mapper namespace="com.example.demo.dao.EmpDao">
 
 	<select id="findAll" resultType="Emp">
-select e.id, d.id dept_id, e.name, e.code, phone, email, d.name dept_name 
-  from emp e left join dept d on d.id = e.dept_id
- where e.valid = true
+		select e.id, d.id dept_id, e.name, e.code, phone, email, d.name dept_name
+		from emp e left join dept d on d.id = e.dept_id
+		where e.valid = true
 	</select>
 
 	<select id="findMembers" resultType="Emp">
-select e.id, d.id dept_id, e.name, e.code, phone, email, d.name dept_name 
-  from emp e left join dept d on d.id = e.dept_id
- where e.valid = true and e.dept_id = #{id}
+		select e.id, d.id dept_id, e.name, e.code, phone, email, d.name dept_name
+		from emp e left join dept d on d.id = e.dept_id
+		where e.valid = true and e.dept_id = #{id}
 	</select>
 
 	<select id="findOne" resultType="Emp">
-		select e.id, e.code, e.name, d.id dept_id, d.name dept_name ,phone, email
-		from emp e left join dept d on d.id = e.dept_id
+		select e.id, e.code, e.name,
+		d.id dept_id, d.name dept_name ,phone, email
+		from emp e left join dept
+		d on d.id = e.dept_id
 		where e.id = #{id}
 	</select>
 
@@ -33,11 +35,18 @@ select e.id, d.id dept_id, e.name, e.code, phone, email, d.name dept_name
 		</set>
 		where id=#{e.id}
 	</update>
-	
+
 	<select id="findByCode" resultType="Emp">
-		select e.id, e.code, e.name, d.id dept_id, d.name dept_name ,phone, email
-		from emp e left join dept d on d.id = e.dept_id
+		select e.id, e.code, e.name,
+		d.id dept_id, d.name dept_name ,phone, email
+		from emp e left join dept
+		d on d.id = e.dept_id
 		where e.code = #{code}
+<<<<<<< HEAD
 	</select>	
 	
  </mapper>
+=======
+	</select>
+</mapper>
+>>>>>>> 395a0d64132db0e359d57a9c1bebfbd87dccef3c

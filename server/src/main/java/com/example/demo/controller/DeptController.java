@@ -32,25 +32,20 @@ public class DeptController {
 	public Object findAll() {
 		return response(dao.findAll());
 	}
-	
-	@GetMapping("/{id}")
-	public Object findById(@PathVariable int id) {
-		return response(dao.findOne(id));
-	}
-
-	@GetMapping("/s/{id}")
-	public Object findSub(@PathVariable int id) {
-		return response(dao.findSub(id));
-	}
 
 	@GetMapping("/org")
 	public Object getOrg() {
 		return response(service.getOrg());
 	}
 	
-	@DeleteMapping("/{id}")
-	public Object delete(@PathVariable int id) {
-		return response(dao.delete(id), HttpStatus.NOT_FOUND);
+	@GetMapping("/{id}")
+	public Object findById(@PathVariable int id) {
+		return response(dao.findOne(id));
+	}
+	
+	@GetMapping("/m/{id}")
+	public Object findMembers(@PathVariable int id) {
+		return response(service.findMembers(id));
 	}
 
 	@PostMapping
@@ -61,5 +56,10 @@ public class DeptController {
 	@PutMapping
 	public Object update(@RequestBody Dept dept) {
 		return response(dao.update(dept), HttpStatus.CONFLICT);
+	}
+	
+	@DeleteMapping("/{id}")
+	public Object delete(@PathVariable int id) {
+		return response(dao.delete(id), HttpStatus.NOT_FOUND);
 	}
 }

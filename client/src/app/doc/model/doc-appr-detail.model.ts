@@ -3,4 +3,6 @@ export class DocApprDetail {
     approver: number;
     approverName: string;
     deptName: string;
+    stat: number;
+    reason: string;
 }

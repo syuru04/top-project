@@ -2,9 +2,7 @@ package com.example.demo.service;
 
 import static com.example.demo.service.Util.encrypt;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +37,7 @@ public class EmpService {
 		dao.deleteChief(id);
 		return dao.delete(id);
 	}
+<<<<<<< HEAD
 	
 	public List<Emp> findMembers(int id) {
 		List<Emp> emps = new ArrayList<>();
@@ -56,4 +55,6 @@ public class EmpService {
 			findMembers(emps, subId);
 		}
 	}
+=======
+>>>>>>> 395a0d64132db0e359d57a9c1bebfbd87dccef3c
 }
