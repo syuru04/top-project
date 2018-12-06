@@ -42,11 +42,6 @@
 		from emp e left join dept
 		d on d.id = e.dept_id
 		where e.code = #{code}
-<<<<<<< HEAD
 	</select>	
 	
  </mapper>
-=======
-	</select>
-</mapper>
->>>>>>> 395a0d64132db0e359d57a9c1bebfbd87dccef3c
