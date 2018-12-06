@@ -37,4 +37,21 @@ public class EmpService {
 		dao.deleteChief(id);
 		return dao.delete(id);
 	}
+	
+	public List<Emp> findMembers(int id) {
+		List<Emp> emps = new ArrayList<>();
+		findMembers(emps, id);
+		emps.sort((a, b) -> a.getName().compareTo(b.getName()));
+		return emps;
+	}
+	
+	
+	
+	
+	public void findMembers(List<Emp> emps, int id) {
+		emps.addAll(dao.findMembers(id));
+		for (int subId : deptDao.findSub(id)) {
+			findMembers(emps, subId);
+		}
+	}
 }

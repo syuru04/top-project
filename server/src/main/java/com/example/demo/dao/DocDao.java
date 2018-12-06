@@ -5,15 +5,18 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.SelectKey;
 
 import com.example.demo.domain.Doc;
 import com.example.demo.domain.DocAppr;
+import com.example.demo.domain.Note;
 
 @Mapper
 public interface DocDao {
 
 	public List<Doc> findAll();
+	
 	public DocAppr findByUpinfo(int deptId);
 	
 	@Insert("insert into doc(title ,body ,publish ,author ,ts) values(#{title}, #{body}, #{publish}, #{author}, #{ts})")
@@ -21,6 +24,8 @@ public interface DocDao {
 	public int insert(Doc doc);
 	
 	public Doc findOne(int id);
+	
+	public List<Doc> find(@Param("skip") int skip, @Param("count") int count);
 			
 	public int update(Doc doc);
 	

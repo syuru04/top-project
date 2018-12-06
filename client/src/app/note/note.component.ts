@@ -1,8 +1,6 @@
-import { Component, OnInit, } from '@angular/core';
-import { Note, NotePage } from './note.model';
+import { Component, OnInit } from '@angular/core';
 import { NoteService } from './note-http.service';
-import { TouchSequence, Alert } from 'selenium-webdriver';
-import { ArrayType } from '@angular/compiler';
+import { Note } from './note.model';
 
 
 @Component({
@@ -14,6 +12,7 @@ import { ArrayType } from '@angular/compiler';
 export class NoteComponent implements OnInit {
   today = new Date();
   formStat = "list";
+  authorId = "N";
   updateId: number;
   index: number;
   start: number;
@@ -84,13 +83,10 @@ export class NoteComponent implements OnInit {
     }
   }
   goupdate(id,author) {
-    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));    
-    if (author == sessionValue.id) {    
+        
       this.formStat = "input";
       this.updateId = id;
-    } else {    
-      alert("작성자만 수정이 가능합니다.")
-    }
+    
   }
 
   btnListClick(): void {
@@ -102,7 +98,13 @@ export class NoteComponent implements OnInit {
     this.updateId = undefined;
   }
 
-  btnTitleClick(id: number, i: number): void {
+  btnTitleClick(id: number, i: number,author:number): void {
+
+    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));    
+    alert(sessionValue.id +"/"+author);
+    if (sessionValue.id == author){
+      this.authorId = 'Y';
+    }
     this.index = i;
     this.formStat = "detail"
     this.service.get2(id).subscribe(data => this.note = data);

@@ -27,6 +27,10 @@ export class JoinService {
     );
   }
 
+  codeChk(code:string):Observable<any>{
+    return this.http.post<any>(URL+'j/',code,HTTP_OPTIONS);
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

@@ -5,7 +5,6 @@ import static com.example.demo.controller.Util.response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dao.DocDao;
 import com.example.demo.domain.Doc;
-import com.example.demo.service.DocService;
 
 @CrossOrigin("*")
 @RestController
@@ -24,9 +22,6 @@ import com.example.demo.service.DocService;
 public class DocController {
 	@Autowired
 	private DocDao dao;
-	
-	@Autowired
-	private DocService service;
 	
 	@GetMapping
 	public Object findAll() {
@@ -36,6 +31,11 @@ public class DocController {
 	@GetMapping("/{id}")
 	public Object findByDoc(@PathVariable int id) {
 		return response(dao.findOne(id));
+	}
+	
+	@PostMapping("/range")
+	public Object find(@RequestBody int[] range) {
+		return response(dao.find(range[0], range[1]));
 	}
 	
 	@PostMapping("/u")
@@ -53,9 +53,4 @@ public class DocController {
 	public Object update(@RequestBody Doc doc) {
 		return response(dao.update(doc), HttpStatus.CONFLICT);
 	}	
-	
-	@DeleteMapping("/{id}")
-	public Object delete(@PathVariable int id) {
-		return response(service.delete(id), HttpStatus.NOT_FOUND);
-	}
 }
