@@ -38,7 +38,7 @@ public class EmpServiceTest {
 		emp.setName("임꺽정");
 		emp.setPhone("01012345678");
 		emp.setPw("나 두령이오.");
-		assertEquals(1, service.insert(emp));
+		service.insert(emp);
 		assertTrue(service.isPwOk("두령", "나 두령이오."));
 	}
 

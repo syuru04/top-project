@@ -29,7 +29,7 @@ public class DeptController {
 	private DeptService service;
 	
 	@GetMapping
-	public Object findAll() {  // 
+	public Object findAll() {
 		return response(dao.findAll());
 	}
 
