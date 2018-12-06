@@ -32,7 +32,7 @@ export class JoinComponent implements OnInit {
   ngOnInit() {
     this.deptService.get().subscribe(data => {
       this.depts = data;
-    });
+    }); 
 
     if (this.proc == 'empMod') {
       this.code = JSON.parse(sessionStorage.getItem('loginData')).code;
@@ -46,17 +46,22 @@ export class JoinComponent implements OnInit {
     this.outputProperty.next({ loginProc: 'login' });
   }
   codeChk(form:NgForm){
-    // const emp = Object.assign({ done: false }, form.value);    
-    // this.joinService.codeChk(emp.code).subscribe(data => {
-    //   if (data > 0) {
-    //     alert("중복된 아이디 입니다.")
-    //     emp.code = "";
-    //     return false;
-    //   }else if(data = 0){
-    //     this.codeChkYN = 'Y';
-    //     alert("사용가능한 아이디 입니다.");
-    //   }
-    // });
+    const emp = Object.assign({ done: false }, form.value);    
+    if (emp.code == undefined) {
+      alert("아이디를 입력하세요");
+      return false;
+    }
+    this.joinService.codeChk(emp.code).subscribe(data => {
+      
+      if (data > 0) {
+        alert("중복된 아이디 입니다.")        
+        return false;
+      }else if(data ==0){
+        if(confirm("   사용가능한 아이디 입니다 \n 이 아이디를 사용하시겠습니까?")){
+          this.codeChkYN = 'Y';                  
+        };
+      }
+    });
   }
   f_submit(form: NgForm) {
     const emp = Object.assign({ done: false }, form.value);
@@ -83,6 +88,9 @@ export class JoinComponent implements OnInit {
         return false;
       } else if (emp.email == null || emp.email == "") {
         alert("이메일을 입력하세요");
+        return false;
+      } else if (this.codeChkYN == 'N') {
+        alert("아이디를 확인하세요");
         return false;
       }
       this.joinService.add(emp).subscribe(emp => {

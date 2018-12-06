@@ -9,11 +9,13 @@
           <div class="row"> 
             <div class="form-group">
               <label class="col-lg-3 control-label">아이디</label>
-              <div class="col-lg-6">                              
+              <div class="col-lg-4">                              
                 <input *ngIf="proc=='empMod'" type="hidden" class="form-control" name="id" id="id" [ngModel]="emp?.id"/>
-                <input type="text" class="form-control" name="code" id="code" [ngModel]="emp?.code" required/>
+                <input  type="text" class="form-control" name="code" id="code" [ngModel]="emp?.code"  required/>
+              </div>                
+              <div class="col-lg-2">
                 <a *ngIf="proc=='join'" class="btn btn-default" (click)="codeChk(f)">중복확인</a>
-              </div>                     
+              </div>     
             </div>
           </div>
           <div   class="row"> 

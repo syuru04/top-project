@@ -1,43 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 <mapper namespace="com.example.demo.dao.DocDao">
 	<select id="findAll" resultType="Doc">
-		select doc.id, doc.title, doc.body, doc.publish, doc.author, emp.name as authorName, doc.ts, emp.dept_name as deptName
+		select doc.id, doc.title,
+		doc.body, doc.publish, doc.author, emp.name as authorName, doc.ts,
+		emp.dept_name as deptName
 		from doc
 		left join (
-		  select emp.id, emp.dept_id, dept.name dept_name, emp.name 
-		  from emp
-		  left join dept ON emp.dept_id = dept.id
+		select emp.id, emp.dept_id, dept.name dept_name, emp.name
+		from emp
+		left join dept ON emp.dept_id = dept.id
 		) emp on doc.author=emp.id
 	</select>
-	
-	<select id="findOne" resultType="Doc">
-		 select d.id, d.title, d.body, if(d.publish=1,'true','false') as publish, d.author, e.name as authorName, d.ts
-		 from doc d
-		 left join emp e on d.author = e.id
-		 where d.id = #{id}
+	<select id="find" resultType="Doc">
+		select doc.id, doc.title, doc.body, emp.name as
+		authorName, doc.ts, emp.dept_name as deptName
+		from doc
+		left join (
+		select emp.id, emp.dept_id, dept.name dept_name, emp.name
+		from emp
+		left join dept ON emp.dept_id = dept.id
+		) emp on doc.author=emp.id
+		order by doc.id desc limit #{skip}, #{count}
 	</select>
-	
+	<select id="findOne" resultType="Doc">
+		select d.id, d.title, d.body, if(d.publish=1,'true','false') as publish,
+		d.author, e.name as authorName, d.ts
+		from doc d
+		left join emp e on d.author = e.id
+		where d.id = #{id}
+	</select>
+
 	<select id="findByUpinfo" resultType="DocAppr">
-		select 	z.lev1_dept, z.lev1_chief, e1.name lev1_name
-			    , z.lev2_dept, z.lev2_chief, e2.name lev2_name
-			    , z.lev3_dept, z.lev3_chief, e3.name lev3_name
+		select z.lev1_dept,
+		z.lev1_chief, e1.name lev1_name
+		, z.lev2_dept, z.lev2_chief, e2.name lev2_name
+		, z.lev3_dept, z.lev3_chief, e3.name lev3_name
 		from(
-				  select  t1.name as lev1_dept, t1.chief as lev1_chief
-				        , t2.name as lev2_dept, t2.chief as lev2_chief
-				        , t3.name as lev3_dept, t3.chief as lev3_chief
-				  from dept as t1 
-				  left join dept as t2 on t2.id = t1.up_id 
-				  left join dept as t3 on t3.id = t2.up_id 
-				  where t1.id = #{deptId}
+		select t1.name as lev1_dept, t1.chief as lev1_chief
+		, t2.name as lev2_dept, t2.chief as lev2_chief
+		, t3.name as lev3_dept, t3.chief as lev3_chief
+		from dept as t1
+		left join dept as t2 on t2.id = t1.up_id
+		left join dept as t3 on t3.id = t2.up_id
+		where t1.id = #{deptId}
 		) z
 		left join emp e1 on z.lev1_chief=e1.id
-		left join emp e2 on z.lev2_chief=e2.id
+		left join
+		emp e2 on z.lev2_chief=e2.id
 		left join emp e3 on z.lev3_chief=e3.id
 	</select>
-	
+
 	<update id="update" parameterType="Doc">
 		update doc
 		<set>

@@ -26,8 +26,8 @@
   </table>
   <!-- 게시판 버튼 -->
   <p class="text-right" style="margin-top: 10px">
-    <a class="btn btn-default btn-sm" id="btn_del" (click)="remove(note.id)">삭제</a>&nbsp;
-    <a class="btn btn-primary btn-sm" id="btn_mod" (click)="goupdate(note.id,note.author)">수정</a>&nbsp;
+    <a *ngIf="authorId =='Y'" class="btn btn-default btn-sm" id="btn_del" (click)="remove(note.id)">삭제</a>&nbsp;
+    <a *ngIf="authorId =='Y'" class="btn btn-primary btn-sm" id="btn_mod" (click)="goupdate(note.id,note.author)">수정</a>&nbsp;
     <a class="btn btn-default btn-sm" id="btn_list" (click)="btnListClick()">목록</a>
   </p>
 </div>
@@ -48,21 +48,15 @@
     <tbody>
       <tr *ngFor="let note of notes;index as i" data-index="#i">
         <td>{{note.id}}</td>
-        <td class="textLeft"><a (click)="btnTitleClick(note.id,i)">{{note.title}}</a></td>
+        <td class="textLeft"><a (click)="btnTitleClick(note.id,i,note.author)">{{note.title}}</a></td>
         <td>{{note.name}}</td>
         <td>{{note.ts | date:'yy.MM.dd HH:mm'}}</td>
       </tr>
     </tbody>
   </table>  
-  <div class="center">
-    <div class="pagination">
-      <a >&laquo;</a>
-    </div>
+  <div class="center">   
     <div class="pagination" *ngFor="let a of pageArray">
       <a (click)="pageBtnClick(a)">{{ a }}</a>
-    </div>
-    <div class="pagination">
-      <a>&raquo;</a>
-    </div>    
+    </div>   
   </div>
  

@@ -10,10 +10,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let doc of docs; index as i">
+      <tr *ngFor="let doc of docs">
         <td>{{doc.id}}</td>
         <td>{{doc.deptName}}</td>
-        <td class="textLeft"><a (click)="detail(doc.id)">{{doc.title}}</a></td>
+        <td class="textLeft"><p>{{doc.title}}</p></td>
         <td>{{doc.ts|date:'MM.dd'}}</td>
       </tr>
     </tbody>

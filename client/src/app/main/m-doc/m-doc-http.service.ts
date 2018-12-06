@@ -11,15 +11,15 @@ const HTTP_OPTIONS = {
 };
 
 @Injectable({providedIn: 'root'})
-export class MDocHttpService {
 
+export class MDocHttpService {
   constructor(private http: HttpClient) {}
 
   get(): Observable<Doc[]> {
     return this.http.get<Doc[]>(URL);
   }
-  pageRange(id:number, range:number): Observable<any> {
-    return this.http.post<any>(URL+'range/', [id, range], HTTP_OPTIONS).pipe(
+  pageRange(id:number, range:number): Observable<any> {    
+    return this.http.post<any>(URL+'range/', [0, range], HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('pageRange'))
     );
   }  
