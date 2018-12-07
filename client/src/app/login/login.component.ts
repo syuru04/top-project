@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
             
             // 세션에 넣기
             sessionStorage.setItem('loginData',JSON.stringify(this.emp));
-            this.loginService.loginName = (JSON.parse(sessionStorage.getItem('loginData'))).name;                        
+            // this.loginService.loginName = (JSON.parse(sessionStorage.getItem('loginData'))).name;                        
             this.outputProperty.next({loginProc:'loginSuccess'});
           });                    
         } else {

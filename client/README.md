@@ -29,6 +29,9 @@ $ ng serve -o
 
 
 
-## 그 외 개발을 위해 사용한 프로그램
-* [PostMan](https://www.getpostman.com/apps)
+## 그 외 개발을 위해 사용한 개발도구
+* STS : 서버 개발
+* Visual Studio Code : 클라이언트 개발 / 변경관리  
+* [PostMan](https://www.getpostman.com/apps) 
 * [Toad for MySQL](https://www.toadworld.com/downloads)
+* Slack : 의사소통 도구
