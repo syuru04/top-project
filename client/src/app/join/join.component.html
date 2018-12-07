@@ -12,7 +12,7 @@
               <label *ngIf="proc=='empMod'" class="col-lg-3 control-label">아이디변경</label>
               <div class="col-lg-4">                              
                 <input *ngIf="proc=='empMod'" type="hidden" class="form-control" name="id" id="id" [ngModel]="emp?.id"/>
-                <input  type="text" class="form-control" name="code" id="id" [ngModel]="emp?.code" (click)="a" required/>
+                <input  type="text" class="form-control" name="code" id="code" [ngModel]="emp?.code" (click)="a" required/>
               </div>                
               <div class="col-lg-2">
                 <a class="btn btn-default" (click)="codeChk(f)">중복확인</a>

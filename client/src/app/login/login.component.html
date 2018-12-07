@@ -19,7 +19,7 @@
             <div class="form-group">
               <label class="col-lg-3 control-label">패스워드</label>
               <div class="col-lg-6">
-                <input type="password" class="form-control" [(ngModel)]="user.pw" name="pw" #pw="ngModel" required/>
+                <input type="password" class="form-control" [(ngModel)]="user.pw" name="pw" #pw="ngModel" (keydown.enter)="login()"required/>
               </div>                          
             </div>
           </div>

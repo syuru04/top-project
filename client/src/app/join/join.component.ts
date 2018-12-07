@@ -93,7 +93,7 @@ export class JoinComponent implements OnInit {
     if (this.proc == 'join') {
       if (emp.code == undefined) {
         this.joinError="아이디를 입력하세요";
-        setTimeout(() => document.getElementById("id").focus(), 0);
+        setTimeout(() => document.getElementById("code").focus(), 0);
         return false;
       } else if (emp.pw == null || emp.pw == "") {
         this.joinError="비밀번호를 입력하세요";
