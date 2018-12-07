@@ -29,9 +29,10 @@ export class AppComponent {
     this.loginProc = 'login';
   }
 
-  //join에서 데이터받아오기
+  //join,login에서 데이터받아오기
   receive(data): void {
-    this.loginProc = data.loginProc
+    this.sessionName = this.loginService.loginName;
+    this.loginProc = data.loginProc    
   }
 
   //회원정보수정 클릭시

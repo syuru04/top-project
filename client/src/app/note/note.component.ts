@@ -31,6 +31,7 @@ export class NoteComponent implements OnInit {
   }
 
   ngOnInit() {
+    //페이징
     this.start = 0;
     this.range = 15;
     this.j = 1;

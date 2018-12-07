@@ -16,7 +16,7 @@ const HTTP_OPTIONS = {
 })
 export class LoginService {
   constructor(private http: HttpClient) { }
-  
+  loginName :string; // 로그인시 세션name 저장, (회원정보수정버튼 이름)
   //로그인시 아이디,비밀번호 체크
   pwChk(id:string, pw:string): Observable<any> {
     return this.http.post<Boolean>(URL+'pw', [id, pw], HTTP_OPTIONS).pipe(
