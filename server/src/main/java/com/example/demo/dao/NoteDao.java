@@ -14,7 +14,7 @@ import com.example.demo.domain.Note;
 @Mapper
 public interface NoteDao {
 	
-	@Insert("insert into note(title,body,author,ts) values(#{title},#{body},#{author},#{ts})")
+	@Insert("insert into note(title,body,author) values(#{title},#{body},#{author})")
 	@SelectKey(statement="select LAST_INSERT_ID()", before=false, keyProperty="id", resultType=Integer.class)
 	public int insert(Note note);
 	
@@ -37,5 +37,5 @@ public interface NoteDao {
 	public int count();
 	
 	@Select("select body from Note where id = #{id}")
-	public Note findByTitle(String title);		
+	public Note findByTitle(String title);
 }

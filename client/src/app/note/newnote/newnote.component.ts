@@ -32,20 +32,14 @@ export class NewnoteComponent implements OnInit {
       this.addBtn = "Y";
       this.updateBtn = "N";      
       this.service.get().subscribe(data => {
-        this.notes = data;
-        var datePipe = new DatePipe("en-US");
-        var date2 = datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-        this.ts = date2;
+        this.notes = data;        
       });
     } else {
       //상세보기에서 수정버튼 클릭시
       this.addBtn = "N";
       this.updateBtn = "Y";      
       this.service.get2(this.updateId).subscribe(data => {
-        this.note = data;
-        var datePipe = new DatePipe("en-US");
-        var date2 = datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-        this.ts = date2;
+        this.note = data;        
       });
     }
   }
@@ -64,9 +58,7 @@ export class NewnoteComponent implements OnInit {
         alert("내용을 입력하세요");
         return false;
       }      
-      this.service.add(note).subscribe(
-        note => {
-          this.notes.push(note);
+      this.service.add(note).subscribe(() => {
           window.location.reload();
           this.formStat = "list";
           this.outputProperty.emit(this.formStat);

@@ -22,12 +22,11 @@ export class LoginComponent implements OnInit {
 
   @Output() outputProperty: EventEmitter<any> = new EventEmitter();
    
-  constructor(
-    private loginService: LoginService,
-    private router: Router) { }
+  constructor(private loginService: LoginService) { }
 
   ngOnInit() { }
 
+  //로그인 버튼 클릭시
   login() {
     this.loginService.pwChk(this.user.id,this.user.pw).subscribe(
       result => {
@@ -39,7 +38,7 @@ export class LoginComponent implements OnInit {
             
             // 세션에 넣기
             sessionStorage.setItem('loginData',JSON.stringify(this.emp));
-            
+            this.loginService.loginName = (JSON.parse(sessionStorage.getItem('loginData'))).name;                        
             this.outputProperty.next({loginProc:'loginSuccess'});
           });                    
         } else {
