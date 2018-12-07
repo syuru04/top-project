@@ -90,4 +90,9 @@ public class DocController {
 	public Object find(@RequestBody int[] range) {
 		return response(dao.find(range[0], range[1]));
 	}
+	
+	@PostMapping("/c")
+	public Object apprCnt(@RequestBody int id) {
+		return response(dao.apprCnt(id));
+	}	
 }
