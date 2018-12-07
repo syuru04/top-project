@@ -36,6 +36,12 @@ export class DetailDocHttpService {
     );
   }
 
+  getApprCnt(id:number): Observable<any> {      
+    return this.http.post<any>(URL+'c', id, HTTP_OPTIONS).pipe(
+      catchError(this.handleError<any>('getApprCnt'))
+    );
+  }
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

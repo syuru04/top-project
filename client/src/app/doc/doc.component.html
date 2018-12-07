@@ -24,7 +24,7 @@
           <th>작성자</th>
           <th style="width:50%">제목</th>
           <th>작성일</th>
-          <th>결재현황</th>
+          <!-- <th>결재현황</th> -->
         </tr>
       </thead>
       <tbody>
@@ -33,7 +33,7 @@
           <td>{{doc.authorName}}</td>
           <td class="textLeft"><a (click)="detail(doc.docId)">{{doc.title}}</a></td>
           <td>{{doc.ts|date:'yy.MM.dd HH:mm'}}</td>
-          <td>{{doc.stat==0?'결재 중':doc.stat==1?'반려':'결재 완료'}}</td>
+          <!-- <td>{{doc.stat==0?'결재 중':doc.stat==1?'반려':'결재 완료'}}</td> -->
         </tr>
         <tr *ngIf="count==0">
           <td colspan="5" class="fontGray">작성한 결재문서가 없습니다.</td>

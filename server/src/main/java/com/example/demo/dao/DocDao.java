@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
 
 import com.example.demo.domain.Doc;
@@ -37,5 +38,8 @@ public interface DocDao {
 	public List<Doc> myDoc(int author);
 
 	public List<Doc> aprvDoc(@Param("approver") int approver, @Param("stat") int stat);
+	
+	@Select("select count(*) as cnt from approval where doc_id = #{id} and stat != 0")
+	public int apprCnt(int id);
 
 }

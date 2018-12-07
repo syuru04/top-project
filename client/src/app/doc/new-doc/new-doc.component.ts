@@ -64,7 +64,7 @@ export class NewDocComponent implements OnInit {
     // 현재 날짜,시간 불러오기
     var datePipe = new DatePipe("en-US");
     var date2 = datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
-    this.ts = date2;
+    this.ts = date2;    
     
     // 수정일 경우
     if (this.updateId != undefined) {

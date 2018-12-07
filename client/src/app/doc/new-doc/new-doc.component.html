@@ -1,12 +1,12 @@
 <form #f="ngForm" (ngSubmit)="f_action(f)" class="form-horizontal">
   <div class="control-group" id="fields">
     <div class="controls">
-      <div class="well bs-component">
+      <div class="well bs-component">  
         <input type="hidden" id="author" name="author" [ngModel]="author" value={{doc?.author}}/>   
         <input type="hidden" id="ts" name="ts" [ngModel]="ts"> 
            
         <div class="form-group"> 
-          <label class="col-lg-2 control-label">전결</label>
+          <label class="col-lg-2 control-label" style="margin-top: 10px;">전결</label>
           <div *ngIf="docProc!='detail'" class="col-lg-8">
             <label class="radio-label">
               <span><input class="radioBtn" type="radio" name="approver" [value]="lev1Chief" (click)="rdo1Click(lev1Chief)" checked="checked" >{{lev1Name}} ({{lev1Dept}}) &nbsp;&nbsp;</span>
@@ -30,7 +30,8 @@
         <div class="form-group">           
           <label class="col-lg-2 control-label">제목</label>
           <div class="col-lg-8">
-            <input type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{doc?.title}} />
+            <input *ngIf="updateId==''" type="text" class="form-control" id="title" name="title" [ngModel]="title" />
+            <input *ngIf="updateId!=''" type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{doc?.title}} />
           </div>
           <!-- <div class="col-lg-2">
             <select class="form-control" name="publish" id="publish" [ngModel]="publish">  
@@ -43,7 +44,8 @@
         <div class="form-group">
           <label for="textArea" class="col-lg-2 control-label">내용</label>
           <div class="col-lg-8">
-            <!-- <textarea class="form-control" rows="10" id="body" name="body" style="resize: none;" [ngModel]="body" value={{doc?.body}}></textarea> -->
+            <textarea *ngIf="updateId==''" class="form-control" rows="10" id="body" name="body" style="resize: none;" [ngModel]="body"></textarea>
+            <textarea *ngIf="updateId!=''" class="form-control" rows="10" id="body" name="body" style="resize: none;" [ngModel]="body" value={{doc?.body}}></textarea>
           </div>
         </div>
         <p class="text-right">

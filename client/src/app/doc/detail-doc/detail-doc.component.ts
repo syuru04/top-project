@@ -29,6 +29,7 @@ export class DetailDocComponent implements OnInit {
   approver: number;
   returnMod: boolean;
   stat: string;
+  cnt: number;
 
   constructor(
     private detailDocService: DetailDocHttpService,
@@ -46,18 +47,24 @@ export class DetailDocComponent implements OnInit {
       this.doc = data;      
     });
 
+    // 결재자 리스트 불러오기
     this.detailDocService.getApproverList(this.updateId).subscribe(data => {
       this.docApprs = data;            
+    });
+
+    // 결재처리 되었는지 확인(결재된 문서는 수정,삭제버튼 비활성화)
+    this.detailDocService.getApprCnt(this.updateId).subscribe(result => {
+      this.cnt = result;    
     });
   }
 
   // 승인버튼 클릭
   aprv(id:number) {
     if (window.confirm("승인처리 하시겠습니까?")) {
-      const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
+      const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));      
       const apprInfo = { docId:id, approver:sessionValue.id, stat:2, ts:this.ts} as Approver; 
       this.detailDocService.aprv(apprInfo).subscribe(data => {
-        this.outputProperty.next({docProc:'list'});  
+        window.location.reload();
       });
     } else {
       return false;
@@ -76,11 +83,11 @@ export class DetailDocComponent implements OnInit {
 
   // 반려폼에서 입력버튼 클릭
   returnAction(form: NgForm, id:number) {
-    if (window.confirm("Return ?")) {
+    if (window.confirm("반려처리 하시겠습니까?")) {
       const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));      
       const apprInfo = { docId:id, approver:sessionValue.id, stat:1, reason:form.value.reason, ts:this.ts } as Approver; 
       this.detailDocService.aprv(apprInfo).subscribe(data => {
-        this.outputProperty.next({docProc:'list'});  
+        window.location.reload();
       });
     } else {
       return false;
@@ -89,7 +96,7 @@ export class DetailDocComponent implements OnInit {
 
    // 삭제버튼 클릭
    remove(id:number) {
-    if (window.confirm("Delete ?")) {
+    if (window.confirm("삭제 하시겠습니까?")) {
       this.detailDocService.remove(id).subscribe(data => {});
       this.outputProperty.next({docProc:'list'});  
       window.location.reload();
