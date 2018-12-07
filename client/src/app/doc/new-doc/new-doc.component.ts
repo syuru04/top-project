@@ -88,7 +88,7 @@ export class NewDocComponent implements OnInit {
     if(this.docProc=='detail') {    
       const modDoc = Object.assign({ id: this.updateId }, form.value);
       this.newDocService.update(modDoc).subscribe(result => {
-        this.outputProperty.next({docProc:'list'});  
+        this.outputProperty.emit({docProc:'list'});  
         window.location.reload();   
       }); 
       
@@ -105,7 +105,7 @@ export class NewDocComponent implements OnInit {
         if(this.chief2!=0) this.appr_lev2();
         if(this.chief3!=0) this.appr_lev3();
 
-        this.outputProperty.next({docProc:'list'});  
+        this.outputProperty.emit({docProc:'list'});  
         window.location.reload();   
       }); 
     }     
@@ -146,6 +146,6 @@ export class NewDocComponent implements OnInit {
 
   // 목록으로 돌아가기
   cancel(form: NgForm): void {
-    this.outputProperty.next({docProc:'list'});
+    this.outputProperty.emit({docProc:'list'});
   }
 }

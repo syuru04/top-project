@@ -98,7 +98,7 @@ export class DetailDocComponent implements OnInit {
    remove(id:number) {
     if (window.confirm("삭제 하시겠습니까?")) {
       this.detailDocService.remove(id).subscribe(data => {});
-      this.outputProperty.next({docProc:'list'});  
+      this.outputProperty.emit({docProc:'list'});  
       window.location.reload();
     } else {
       return false;
@@ -108,12 +108,12 @@ export class DetailDocComponent implements OnInit {
   // 수정버튼 클릭
   mod(id:number): void {
     this.updateId = id;
-    this.outputProperty.next({docProc:'mod'});  
+    this.outputProperty.emit({docProc:'mod'});  
   }
 
   // 목록버튼 클릭
   docList() {
-    this.outputProperty.next({docProc:'list'});  
+    this.outputProperty.emit({docProc:'list'});  
   }
 
 }
