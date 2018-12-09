@@ -12,7 +12,7 @@ import { Emp } from '../emp/emp.model';
 export class OrgChartComponent implements OnInit {
   constructor(private deptHttp: DeptHttpService,
               private empHttp: EmpHttpService) {}
-  
+
   manager: boolean;
   depts: Dept[];              // 조직도 root
   dept: Dept;                 // 부서
@@ -35,7 +35,7 @@ export class OrgChartComponent implements OnInit {
   private setManager(): void {
     if (this.dept == this.depts[0]) {
       const user = JSON.parse(sessionStorage.getItem("loginData")) as Emp;
-      this.manager = user.id == this.depts[0].chief;  
+      this.manager = user.id == this.depts[0].chief;
     }
   }
 
@@ -82,6 +82,7 @@ export class OrgChartComponent implements OnInit {
     this.deptHttp.update({id: this.dept.id, name} as Dept).subscribe(() => {
       this.dept.name = name;
       this.renaming = false;  // 입력 창을 닫는다
+      this.setDept(this.dept);
     });
   }
 
