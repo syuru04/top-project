@@ -145,7 +145,8 @@ export class JoinComponent implements OnInit {
         setTimeout(() => document.getElementById("email").focus(), 0);
         return false;
       }
-      this.joinService.update(emp).subscribe(emp => {
+      this.joinService.update(emp).subscribe(()=> {
+        this.loginService.loginName = emp.name;
         this.outputProperty.next({ loginProc: 'loginSuccess' });
       });
     }
