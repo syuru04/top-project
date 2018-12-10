@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { Emp } from '../emp/emp.model';
 
-const URL = 'http://192.168.0.18:8080/emps/';
+const URL = 'http://' + window.location.hostname + ':8080/emps/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Note, NotePage } from './note.model';
 import { catchError } from 'rxjs/operators';
 
-const URL = 'http://192.168.0.18:8080/notes/';
+const URL = 'http://' + window.location.hostname + ':8080/notes/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -34,9 +34,9 @@ export class NoteService {
       catchError(this.handleError<any>('pageRange'))
     );
   }
-  
+
   //게시판 페이징 (게시글 총 갯수 확인용)
-  pageCount(): Observable<any> {        
+  pageCount(): Observable<any> {
     return this.http.post<any>(URL+'count/', HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('pageCount'))
     );

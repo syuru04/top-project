@@ -7,8 +7,8 @@ import { Doc } from '../model/doc.model';
 import { Approver } from '../model/approver.model';
 import { DocAppr } from '../model/doc-appr.model';
 
-const URL = 'http://192.168.0.18:8080/docs/';
-const URLAppr = 'http://192.168.0.18:8080/appr/';
+const URL = 'http://' + window.location.hostname + ':8080/docs/';
+const URLAppr = 'http://' + window.location.hostname + ':8080/appr/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,7 +30,7 @@ export class NewDocHttpService {
   }
 
   update(doc: Doc): Observable<Doc> {
-    return this.http.put<Doc>(URL, doc, HTTP_OPTIONS).pipe(      
+    return this.http.put<Doc>(URL, doc, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('update'))
     );
   }

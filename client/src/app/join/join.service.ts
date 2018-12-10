@@ -5,7 +5,7 @@ import { catchError } from 'rxjs/operators';
 
 import { Emp } from '../emp/emp.model';
 
-const URL = 'http://192.168.0.18:8080/emps/';
+const URL = 'http://' + window.location.hostname + ':8080/emps/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,7 +21,7 @@ export class JoinService {
       catchError(this.handleError<any>('add'))
     );
   }
-  
+
   //회원정보수정에서 등록버튼 클릭시
   update(emp: Emp): Observable<Emp> {
     return this.http.put<Emp>(URL, emp, HTTP_OPTIONS).pipe(
@@ -34,7 +34,7 @@ export class JoinService {
     return this.http.post<any>(URL+'j/',code,HTTP_OPTIONS);
   }
 
-  
+
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error);

@@ -6,8 +6,8 @@ import { catchError } from 'rxjs/operators';
 import { DocApprDetail } from '../model/doc-appr-detail.model';
 import { Approver } from '../model/approver.model';
 
-const URL = 'http://192.168.0.18:8080/docs/';
-const URL_appr = 'http://192.168.0.18:8080/appr/';
+const URL = 'http://' + window.location.hostname + ':8080/docs/';
+const URL_appr = 'http://' + window.location.hostname + ':8080/appr/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,7 +18,7 @@ export class DetailDocHttpService {
 
   constructor(private http: HttpClient) { }
 
-  getApproverList(id:number): Observable<DocApprDetail[]> {      
+  getApproverList(id:number): Observable<DocApprDetail[]> {
     return this.http.post<DocApprDetail[]>(URL_appr+'a/', id, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('getApproverList'))
     );
@@ -36,7 +36,7 @@ export class DetailDocHttpService {
     );
   }
 
-  getApprCnt(id:number): Observable<any> {      
+  getApprCnt(id:number): Observable<any> {
     return this.http.post<any>(URL+'c', id, HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('getApprCnt'))
     );

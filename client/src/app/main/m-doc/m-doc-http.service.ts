@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Doc } from '../../doc/model/doc.model';
 
-const URL = 'http://192.168.0.18:8080/docs/';
+const URL = 'http://' + window.location.hostname + ':8080/docs/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,11 +18,11 @@ export class MDocHttpService {
   get(): Observable<Doc[]> {
     return this.http.get<Doc[]>(URL);
   }
-  pageRange(id:number, range:number): Observable<any> {    
+  pageRange(id:number, range:number): Observable<any> {
     return this.http.post<any>(URL+'range/', [0, range], HTTP_OPTIONS).pipe(
       catchError(this.handleError<any>('pageRange'))
     );
-  }  
+  }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
