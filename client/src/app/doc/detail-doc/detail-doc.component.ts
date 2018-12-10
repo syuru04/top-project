@@ -8,6 +8,7 @@ import { DocApprDetail } from '../model/doc-appr-detail.model';
 
 import { DocHttpService } from '../doc-http.service';
 import { DetailDocHttpService } from './detail-doc-http.service';
+import { DocComponent } from '../doc.component';
 
 @Component({
   selector: 'app-detail-doc',
@@ -18,7 +19,7 @@ export class DetailDocComponent implements OnInit {
 
   @Output() outputProperty: EventEmitter<any> = new EventEmitter();
   @Input() updateId: number;
-  @Input() docMenu: number;
+  @Input() docMenu: string;
 
   doc: Doc;
   docs: Doc[];
@@ -33,7 +34,8 @@ export class DetailDocComponent implements OnInit {
 
   constructor(
     private detailDocService: DetailDocHttpService,
-    private docService: DocHttpService) { }
+    private docService: DocHttpService,
+    private docComponent : DocComponent) { }
 
   ngOnInit() {
     
@@ -63,8 +65,7 @@ export class DetailDocComponent implements OnInit {
     if (window.confirm("승인처리 하시겠습니까?")) {
       const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));      
       const apprInfo = { docId:id, approver:sessionValue.id, stat:2, ts:this.ts} as Approver; 
-      this.detailDocService.aprv(apprInfo).subscribe(data => {
-        window.location.reload();
+      this.detailDocService.aprv(apprInfo).subscribe(data => {        
       });
     } else {
       return false;
@@ -86,8 +87,7 @@ export class DetailDocComponent implements OnInit {
     if (window.confirm("반려처리 하시겠습니까?")) {
       const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));      
       const apprInfo = { docId:id, approver:sessionValue.id, stat:1, reason:form.value.reason, ts:this.ts } as Approver; 
-      this.detailDocService.aprv(apprInfo).subscribe(data => {
-        window.location.reload();
+      this.detailDocService.aprv(apprInfo).subscribe(data => {        
       });
     } else {
       return false;
@@ -97,9 +97,10 @@ export class DetailDocComponent implements OnInit {
    // 삭제버튼 클릭
    remove(id:number) {
     if (window.confirm("삭제 하시겠습니까?")) {
-      this.detailDocService.remove(id).subscribe(data => {});
-      this.outputProperty.emit({docProc:'list'});  
-      window.location.reload();
+      this.detailDocService.remove(id).subscribe(data => {
+        this.docComponent.getList();
+      });
+      this.outputProperty.emit({docProc:'list'});        
     } else {
       return false;
     }

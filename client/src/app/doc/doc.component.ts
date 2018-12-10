@@ -32,10 +32,21 @@ export class DocComponent implements OnInit {
       this.count = data.length;
     });
   }
-
+  getList(){
+    this.docService.myDocList(this.id).subscribe(data => {
+      this.docs = data;
+      this.count = data.length;
+    });
+  }
   // 자식 컴포넌트에서 데이터받기(docProc)
   receive(data):void {
     this.docProc = data.docProc
+    const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
+    this.id = sessionValue.id;
+    this.docService.myDocList(this.id).subscribe(data => {
+      this.docs = data;
+      this.count = data.length;
+    });
   }
   
   // 신규 결재상신(결재등록 버튼 클릭)

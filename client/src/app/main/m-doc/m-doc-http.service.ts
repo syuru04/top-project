@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Doc } from '../../doc/model/doc.model';
 
-const URL = 'http://localhost:8080/docs/';
+const URL = 'http://192.168.0.18:8080/docs/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

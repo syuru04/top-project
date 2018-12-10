@@ -61,8 +61,7 @@ export class NewnoteComponent implements OnInit {
         alert("내용을 입력하세요");
         return false;
       }      
-      this.service.add(note).subscribe(() => {
-          window.location.reload();
+      this.service.add(note).subscribe(() => {          
           this.formStat = "list";
           this.outputProperty.emit(this.formStat);
         });
@@ -75,8 +74,7 @@ export class NewnoteComponent implements OnInit {
       return false;
     } else {      
       let note = Object.assign({ id: this.updateId }, form.value);   
-      this.service.update(note).subscribe(() => {
-        window.location.reload();
+      this.service.update(note).subscribe(() => {        
         this.formStat = "list";
         this.outputProperty.emit(this.formStat);
       });

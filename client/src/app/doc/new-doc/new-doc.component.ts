@@ -66,14 +66,13 @@ export class NewDocComponent implements OnInit {
     var date2 = datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
     this.ts = date2;    
     
-    // 수정일 경우
-    if (this.updateId != undefined) {
+    // 수정일 경우    
+    if (this.updateId != undefined) {    
       // form에 데이터 불러오기
       this.docService.getDetail(this.updateId).subscribe(data => {
         this.doc = data;
         this.docProc = 'detail';
       });
-
       // 전결(결재자) 불러오기
       this.detailDocService.getApproverList(this.updateId).subscribe(data => {
         this.docApprs = data;      
@@ -88,8 +87,7 @@ export class NewDocComponent implements OnInit {
     if(this.docProc=='detail') {    
       const modDoc = Object.assign({ id: this.updateId }, form.value);
       this.newDocService.update(modDoc).subscribe(result => {
-        this.outputProperty.emit({docProc:'list'});  
-        window.location.reload();   
+        this.outputProperty.emit({docProc:'list'});          
       }); 
       
     // 등록
@@ -106,7 +104,7 @@ export class NewDocComponent implements OnInit {
         if(this.chief3!=0) this.appr_lev3();
 
         this.outputProperty.emit({docProc:'list'});  
-        window.location.reload();   
+        
       }); 
     }     
   }

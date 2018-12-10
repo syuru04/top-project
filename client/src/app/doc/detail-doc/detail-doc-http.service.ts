@@ -6,8 +6,8 @@ import { catchError } from 'rxjs/operators';
 import { DocApprDetail } from '../model/doc-appr-detail.model';
 import { Approver } from '../model/approver.model';
 
-const URL = 'http://localhost:8080/docs/';
-const URL_appr = 'http://localhost:8080/appr/';
+const URL = 'http://192.168.0.18:8080/docs/';
+const URL_appr = 'http://192.168.0.18:8080/appr/';
 
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
