@@ -36,24 +36,26 @@
   <p class="text-right">
     <a class="btn btn-success btn-sm" id="btn_new" (click)="btnNewClick()">글작성</a>
   </p>
-  <table class="table table-bordered">
-    <thead>
-      <tr class="active">
-        <th class="col-lg-1">글번호</th>
-        <th class="col-lg-7">제목</th>
-        <th class="col-lg-2">작성자</th>
-        <th class="col-lg-2">등록일</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let note of notes;index as i" data-index="#i">
-        <td>{{note.id}}</td>
-        <td class="textLeft"><a (click)="btnTitleClick(note.id,i,note.author)">{{note.title}}</a></td>
-        <td>{{note.name}}</td>
-        <td>{{note.ts | date:'yy.MM.dd HH:mm'}}</td>
-      </tr>
-    </tbody>
-  </table>  
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr class="active">
+          <th class="col-lg-1">글번호</th>
+          <th class="col-lg-7">제목</th>
+          <th class="col-lg-2">작성자</th>
+          <th class="col-lg-2">등록일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let note of notes;index as i" data-index="#i">
+          <td>{{note.id}}</td>
+          <td class="textLeft"><a (click)="btnTitleClick(note.id,i,note.author)">{{note.title}}</a></td>
+          <td>{{note.name}}</td>
+          <td>{{note.ts | date:'yy.MM.dd HH:mm'}}</td>
+        </tr>      
+      </tbody>
+    </table>  
+  </div>
   <div class="center">   
     <div class="pagination" *ngFor="let a of pageArray">
       <a (click)="pageBtnClick(a)">{{ a }}</a>
