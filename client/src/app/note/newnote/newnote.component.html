@@ -10,8 +10,8 @@
           <div class="form-group">
             <label class="col-lg-2 control-label">제목</label>
             <div class="col-lg-8">
-              <input *ngIf="addBtn =='Y'" type="text" class="form-control" id="title" name="title" [ngModel]="title" />              
-              <input *ngIf="updateBtn =='Y'" type="text" class="form-control" id="title" name="title" [ngModel]="title" value={{note?.title}}/>              
+              <input *ngIf="addBtn =='Y'" type="text" class="form-control" id="title" name="title" [ngModel]="title" maxlength="50" placeholder="50글자이내"/>              
+              <input *ngIf="updateBtn =='Y'" type="text" class="form-control" id="title" name="title" [ngModel]="title" maxlength="50" placeholder="50글자이내" value={{note?.title}}/>              
             </div>
           </div>
           <div class="form-group">

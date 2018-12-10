@@ -50,11 +50,14 @@ export class NewnoteComponent implements OnInit {
       const sessionValue = JSON.parse(sessionStorage.getItem('loginData'));
       const note = Object.assign({ done: false }, form.value);      
       note.author = sessionValue.id;              
-      if (note.title === undefined) {
+      
+      if (note.title === undefined || note.title === "") {
+        alert(note.title)
         note.title = "제목없음"
         note.title = note.title.trim();
       }
-      if (note.body === undefined) {
+      if (note.body === undefined || note.body === "") {
+        alert(note.title)
         alert("내용을 입력하세요");
         return false;
       }      
